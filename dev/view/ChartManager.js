@@ -103,7 +103,7 @@ define([
 
         this._renderOrUpdateAll = function(){
             var lowerbound, upperbound, bounds, xDomain, yDomain, yRange, yEnvelop, yUnit, groupView, chartKey, probe,
-                atLeastOne;
+                atLeastOne, manipulatedListOfSamples;
 
             for (chartKey in $this.charts) { // Apply the data filter to all the probe results
                 atLeastOne = true;
@@ -121,7 +121,10 @@ define([
 
                 for (chartKey in $this.charts) { // Impose the boundaries to all the groups
                     groupView = $this.charts[chartKey];
-                    groupView.samples = env.dataFilter.manipulate(groupView.getGraphicalSamples(xDomain));
+                    manipulatedListOfSamples = env.dataFilter.manipulate(groupView.getGraphicalSamples(xDomain));
+                    groupView.samples = manipulatedListOfSamples.data;
+                    groupView.minOfSamples = manipulatedListOfSamples.min;
+                    groupView.maxOfSamples = manipulatedListOfSamples.max;
                 }
 
                 bounds = $this._getBounds(xDomain); // Search che y boundaries to apply to all the groups
@@ -190,6 +193,7 @@ define([
                     filterClass = NaturalRTTFilter;
                     this.yUnit = "ms";
                     this._getYDomainAndRange = this._getYDomainAndRangeLinear;
+                    this.yAxisWidth = 60;
 
                     //this._getYDomainAndRange = this._getYDomainAndRangeOrdinal;
                     break;
@@ -197,6 +201,7 @@ define([
                     filterClass = RelativeRTTFilter;
                     this.yUnit = "%";
                     this._getYDomainAndRange = this._getYDomainAndRangeLinear;
+                    this.yAxisWidth = 90;
                     break;
 
             }
@@ -429,16 +434,16 @@ define([
 
         this._getBounds = function (xDomain) {
             var maximumElements, forthPercentile, secondPercentile, minimumElement, item, chartKey, groupView, probe,
-                smaples, element;
+                samples, element;
 
             maximumElements = [];
             minimumElement = [];
 
             for (chartKey in $this.charts){
                 groupView = $this.charts[chartKey];
-                smaples = groupView.samples;
-                for (var n = 0,length=smaples.length; n<length; n++){
-                    item = smaples[n];
+                samples = groupView.samples;
+                for (var n = 0,length=samples.length; n<length; n++){
+                    item = samples[n];
 
                     if (item.date >= xDomain[0] && item.min != null) {
 

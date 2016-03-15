@@ -21,7 +21,7 @@ define([
                 dataOut.push(item);
             }
 
-            return dataOut;
+            return {data: dataOut};
         };
 
     };

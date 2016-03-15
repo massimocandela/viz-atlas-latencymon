@@ -650,6 +650,7 @@ define([
             this.lastUpdateParams.yUnit = yUnit;
 
             this.initChart(data, xDomain, yDomain, yRange, yUnit);
+
             this._computePacketLossSpots(data);
             data = this._addUndefinedPoints(data);
 
@@ -841,7 +842,7 @@ define([
 
 
         this.updateChart = function (data, xDomain, yDomain, yRange, yUnit) {
-            var isLast, computedYRange;
+            var isLast, computedYRange, groupDom;
 
             this.lastUsedData = data;
             this.lastUsedDomain = yDomain;
@@ -890,7 +891,9 @@ define([
                 })
                 .orient("left");
 
-            d3.select(this.group.dom[0])
+            groupDom = d3.select(this.group.dom[0]);
+
+            groupDom
                 .select("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom);
@@ -911,6 +914,18 @@ define([
                     .attr("height", 10);
             }
 
+            groupDom
+                .select(".label-min")
+                .text(function(){
+                    var label;
+
+                    label = "";
+                    if (yUnit == "%"){
+                        label = $this.minOfSamples.toFixed(2) + "ms";
+                    }
+
+                    return label;
+                });
 
             svg.select(".x.axis")
                 .attr("transform", "translate(0," + height + ")")
@@ -943,7 +958,6 @@ define([
             width = this.group.dom.innerWidth() - margin.left - margin.right - config.probeDescriptionDomWidth;
             height = chartHeight + extraHeight - margin.top - margin.bottom;
 
-            //computedYRange = (yRange) ? $.map(yRange, function(n){return (height/(yRange.length - 1)) * n}) : [height, 0];
             computedYRange = (yRange) ? yRange : [height, 0];
 
             x = d3.time.scale()
@@ -978,6 +992,7 @@ define([
             svgElement = d3
                 .select(this.group.dom[0])
                 .append("svg");
+
             svgElement
                 .append("rect")
                 .attr("class", "selection-rect");
@@ -1018,12 +1033,19 @@ define([
                     }
                 });
 
-            //env.parentDom.find(".chart-item").css("background", "url(" + widgetUrl + "view/img/latencymon_watermark.png)");
             svg = svgElement
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            svgElement
+                .append("text")
+                .attr("class", "label-min")
+                .attr("x", margin.left - 45)
+                .attr("y", height + 10)
+                .attr("dy", ".35em")
+                .text($this.minOfSamples.toFixed(2) + "ms");
 
             if ($("#pattern-pl-multiple").length == 0){
                 svg

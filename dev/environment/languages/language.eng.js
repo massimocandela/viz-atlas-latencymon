@@ -21,11 +21,11 @@ define([], function(){
         streamingInfo: "Samples coming from the probes in real time",
         leftHeaderDefaultInfo: "Use the icons on the top left to add a measurement",
         chartModeTitle: {
-            absolute: "Absolute values",
-            relative: "Relative values"
+            absolute: "Switch to relative values",
+            relative: "Switch to absolute values"
         },
         absoluteValuesInfo: "The charts now show absolute values",
-        relativeValuesInfo: "The charts now show relative values",
+        relativeValuesInfo: "The charts now show relative values (the 0 is the minimum of the collected latencies)",
 
         documentation: "Documentation",
         embedCode: "Embed in your page",

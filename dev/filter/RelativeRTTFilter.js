@@ -6,15 +6,21 @@ define([
     var RelativeRTTFilter = function (env) {
 
         this.manipulate = function (data) {
-            var dataOut, minOfArray, item, n, length;
+            var dataOut, minOfArray, item, n, length, maxItem, maxOfArray;
 
             dataOut = [];
             minOfArray = Infinity;
-
+            maxOfArray = -Infinity;
             for (n = 0, length = data.length; n < length; n++) {
                 item = data[n];
-                if (item.min !== null) {
-                    minOfArray = Math.min(item.min, minOfArray);
+                if (item.min !== null && minOfArray > item.min) {
+                    //minOfArray = Math.min(item.min, minOfArray);
+                    minOfArray = item.min;
+                }
+
+                maxItem = item.max || item.avg || item.min;
+                if (maxItem !== null && maxOfArray < maxItem) {
+                    maxOfArray = maxItem;
                 }
             }
 
@@ -33,7 +39,7 @@ define([
                 dataOut.push(item);
             }
 
-            return dataOut;
+            return {data: dataOut, min: minOfArray, max: maxOfArray};
         };
 
         this.manipulate2 = function (data) {

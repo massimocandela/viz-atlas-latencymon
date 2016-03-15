@@ -391,7 +391,7 @@ define([
 
 
         this.updateChart = function (data, xDomain, yDomain, yRange, yUnit) {
-            var isLast, computedYRange;
+            var isLast, computedYRange, groupDom;
 
             this.lastUsedData = data;
             this.lastUsedDomain = yDomain;
@@ -456,7 +456,9 @@ define([
                 })
                 .orient("left");
 
-            d3.select(this.group.dom[0])
+            groupDom = d3.select(this.group.dom[0]);
+
+            groupDom
                 .select("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom);
@@ -470,6 +472,19 @@ define([
             svg.append("g")
                 .attr("class", "y axis")
                 .call(yAxis);
+
+            groupDom
+                .select(".label-min")
+                .text(function(){
+                    var label;
+
+                    label = "";
+                    if (yUnit == "%"){
+                        label = $this.minOfSamples.toFixed(2) + "ms";
+                    }
+
+                    return label;
+                });
         };
 
 
@@ -598,6 +613,14 @@ define([
                 .style("visibility", "hidden")
                 .attr("x1", 0).attr("x2", 0)
                 .attr("y1", 0).attr("y2", height + margin.top);
+
+            svgElement
+                .append("text")
+                .attr("class", "label-min")
+                .attr("x", margin.left - 45)
+                .attr("y", height + 10)
+                .attr("dy", ".35em")
+                .text($this.minOfSamples.toFixed(2) + "ms");
 
             $(this.group.dom)
                 .mousemove(function(event) {
