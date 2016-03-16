@@ -411,7 +411,7 @@ define([
 
             computedYRange = (yRange) ? $.map(yRange, function(n){return (height/(yRange.length - 1)) * n}) : [height, 0];
 
-            x = d3.time.scale.utc()
+            x = d3.time.scale()
                 .domain(xDomain)
                 .rangeRound([0, width]);
 
@@ -473,18 +473,20 @@ define([
                 .attr("class", "y axis")
                 .call(yAxis);
 
-            groupDom
-                .select(".label-min")
-                .text(function(){
-                    var label;
+            if ($this.minOfSamples) {
+                groupDom
+                    .select(".label-min")
+                    .text(function () {
+                        var label;
 
-                    label = "";
-                    if (yUnit == "%"){
-                        label = $this.minOfSamples.toFixed(2) + "ms";
-                    }
+                        label = "";
+                        if (yUnit == "%") {
+                            label = $this.minOfSamples.toFixed(2) + "ms";
+                        }
 
-                    return label;
-                });
+                        return label;
+                    });
+            }
         };
 
 
@@ -509,7 +511,7 @@ define([
 
             computedYRange = (yRange) ? $.map(yRange, function(n){return (height/(yRange.length - 1)) * n}) : [height, 0];
 
-            x = d3.time.scale.utc()
+            x = d3.time.scale()
                 .domain(xDomain)
                 .rangeRound([0, width]);
 
@@ -614,13 +616,15 @@ define([
                 .attr("x1", 0).attr("x2", 0)
                 .attr("y1", 0).attr("y2", height + margin.top);
 
-            svgElement
-                .append("text")
-                .attr("class", "label-min")
-                .attr("x", margin.left - 45)
-                .attr("y", height + 10)
-                .attr("dy", ".35em")
-                .text($this.minOfSamples.toFixed(2) + "ms");
+            if ($this.minOfSamples) {
+                svgElement
+                    .append("text")
+                    .attr("class", "label-min")
+                    .attr("x", margin.left - 45)
+                    .attr("y", height + 10)
+                    .attr("dy", ".35em")
+                    .text($this.minOfSamples.toFixed(2) + "ms");
+            }
 
             $(this.group.dom)
                 .mousemove(function(event) {

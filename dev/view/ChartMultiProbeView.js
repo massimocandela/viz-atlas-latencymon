@@ -914,18 +914,20 @@ define([
                     .attr("height", 10);
             }
 
-            groupDom
-                .select(".label-min")
-                .text(function(){
-                    var label;
+            if ($this.minOfSamples) {
+                groupDom
+                    .select(".label-min")
+                    .text(function () {
+                        var label;
 
-                    label = "";
-                    if (yUnit == "%"){
-                        label = $this.minOfSamples.toFixed(2) + "ms";
-                    }
+                        label = "";
+                        if (yUnit == "%") {
+                            label = $this.minOfSamples.toFixed(2) + "ms";
+                        }
 
-                    return label;
-                });
+                        return label;
+                    });
+            }
 
             svg.select(".x.axis")
                 .attr("transform", "translate(0," + height + ")")
@@ -1039,13 +1041,15 @@ define([
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            svgElement
-                .append("text")
-                .attr("class", "label-min")
-                .attr("x", margin.left - 45)
-                .attr("y", height + 10)
-                .attr("dy", ".35em")
-                .text($this.minOfSamples.toFixed(2) + "ms");
+            if ($this.minOfSamples) {
+                svgElement
+                    .append("text")
+                    .attr("class", "label-min")
+                    .attr("x", margin.left - 45)
+                    .attr("y", height + 10)
+                    .attr("dy", ".35em")
+                    .text($this.minOfSamples.toFixed(2) + "ms");
+            }
 
             if ($("#pattern-pl-multiple").length == 0){
                 svg
