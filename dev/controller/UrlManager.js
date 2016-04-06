@@ -119,7 +119,12 @@ define([
 
             try{
                 if (config.permalinkEnabled && window.history && window.history.replaceState && currentUrl) {
-                    window.history.replaceState({}, 'latencymon_state', currentUrl);
+
+                    try {
+                        window.history.replaceState({}, 'latencymon_state', currentUrl);
+                    } catch(e){
+                        console.log("Not possible to set the permalink, probably a security restriction. Try using a web server.")
+                    }
                 }
             }catch(e){
                 // nothing
