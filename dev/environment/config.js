@@ -19,6 +19,8 @@ define([], function(){
         autoMergeOnGrouping: true,
         singleChartHeight: 120,
         naturalResolution: "time",
+        defaultDataFilter: "relative",
+        availableFilters: ["natural", "relative"],
         updateIfYoungerThanMilliseconds: 1000 * 60 * 15,
         timeOverviewMargins:  {top: 0, right: 26, bottom: 70, left: 2},
         brusherBucketLevelsMinutes: {

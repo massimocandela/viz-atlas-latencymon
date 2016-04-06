@@ -35,7 +35,7 @@ define([
                 "groups": groups.join(","),
                 "groups-component": groupsPrbIds.join("L"),
                 "groups-type": groupTypes.join(","),
-                "chart-mode": env.dataFilterName
+                "data-filter": env.dataFilterName
             };
 
             if (measurements.length != originalMeasurements.length){
@@ -60,7 +60,7 @@ define([
             }
             configuration.timeWindow = null; // It can be 1h, 1w bla bla, just to remember this option
             configuration.measurements = parametersUrl.measurements.split(",");
-            configuration.dataFilterName = parametersUrl["chart-mode"];
+            configuration.dataFilter = parametersUrl["data-filter"];
 
             if (parametersUrl.merged) {
                 configuration.mergedMeasurements = $.map(parametersUrl.merged.split(","), function (item) {

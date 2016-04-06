@@ -17,7 +17,8 @@ define([
         $this = this;
         this.dom = {};
         this.yUnit = "%"; // Default unit
-        env.dataFilter = new RelativeRTTFilter(env); // Default filter
+        // env.dataFilterName = "";
+        // env.dataFilter = new RelativeRTTFilter(env); // Default filter
 
         this.charts = {};
 
@@ -46,7 +47,6 @@ define([
             this.updateOrder();
             this.renderOrUpdateAll(true);
         };
-
 
         this._getUpdatableValue = function(){
             if (env.isUpdatable) {
@@ -80,14 +80,12 @@ define([
             return nativeInterval;
         };
 
-
         this._isUpdatable = function(){
             if (!this.updatableCache){
                 this.updatableCache = this._getUpdatableValue();
             }
             return this.updatableCache;
         };
-
 
         this.renderOrUpdateAll = function(skipAntiFlood){
             var antiFloodTime;
@@ -185,7 +183,7 @@ define([
         };
 
 
-        this.setFilter = function(filterName){
+        this.setFilter = function(filterName, skipRedraw){
             var filterClass;
 
             switch(filterName){
@@ -194,9 +192,8 @@ define([
                     this.yUnit = "ms";
                     this._getYDomainAndRange = this._getYDomainAndRangeLinear;
                     this.yAxisWidth = 60;
-
-                    //this._getYDomainAndRange = this._getYDomainAndRangeOrdinal;
                     break;
+
                 case "relative":
                     filterClass = RelativeRTTFilter;
                     this.yUnit = "%";
@@ -206,9 +203,12 @@ define([
 
             }
             env.dataFilter = new filterClass(env);
-            this.renderOrUpdateAll(true);
+            if (!skipRedraw){
+                this.renderOrUpdateAll(true);
+            }
         };
 
+        this.setFilter(config.defaultDataFilter);
 
         this._getYDomainAndRangeLinear = function (lowerbound, upperbound, xDomain) {
             var maxYvalue, item, minYvalue, chartKey, groupView, data, probe;

@@ -415,8 +415,12 @@ define([
 
 
         this.setDataFilter = function(filterName){
-            env.dataFilterName = filterName;
-            env.chartManager.setFilter(filterName);
+            if (config.availableFilters.indexOf(filterName) != -1){
+                env.dataFilterName = filterName;
+                env.chartManager.setFilter(filterName);
+            } else {
+                env.main.error("The specified data filter is not available", "error");
+            }
         };
 
 
@@ -579,10 +583,6 @@ define([
                 $this.setStringTimeRange(conf.timeWindow);
             } else { // No string time window, not time defined, use a reasonable time range
 
-            }
-
-            if (conf.dataFilterName){
-                env.dataFilterName = conf.dataFilterName;
             }
 
             if (conf.measurements) {
