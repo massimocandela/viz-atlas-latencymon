@@ -473,7 +473,7 @@ define([
                 .attr("class", "y axis")
                 .call(yAxis);
 
-            if ($this.minOfSamples) {
+            if ($this.minOfSamples && $this.minOfSamples != Infinity) {
                 groupDom
                     .select(".label-min")
                     .text(function () {
@@ -616,7 +616,7 @@ define([
                 .attr("x1", 0).attr("x2", 0)
                 .attr("y1", 0).attr("y2", height + margin.top);
 
-            if ($this.minOfSamples) {
+            if ($this.minOfSamples && $this.minOfSamples != Infinity) {
                 svgElement
                     .append("text")
                     .attr("class", "label-min")

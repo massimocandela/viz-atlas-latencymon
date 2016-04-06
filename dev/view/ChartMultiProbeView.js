@@ -914,7 +914,7 @@ define([
                     .attr("height", 10);
             }
 
-            if ($this.minOfSamples) {
+            if ($this.minOfSamples  && $this.minOfSamples != Infinity) {
                 groupDom
                     .select(".label-min")
                     .text(function () {
@@ -1041,7 +1041,7 @@ define([
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            if ($this.minOfSamples) {
+            if ($this.minOfSamples  && $this.minOfSamples != Infinity) {
                 svgElement
                     .append("text")
                     .attr("class", "label-min")
