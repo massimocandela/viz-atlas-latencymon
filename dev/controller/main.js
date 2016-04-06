@@ -581,6 +581,10 @@ define([
 
             }
 
+            if (conf.dataFilterName){
+                env.dataFilterName = conf.dataFilterName;
+            }
+
             if (conf.measurements) {
                 measurementCounter = 0;
                 callsAddMeasurements = [];
