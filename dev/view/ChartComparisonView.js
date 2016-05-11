@@ -766,7 +766,7 @@ define([
                 }
 
                 // description.push("Date: " + utils.dateToString(dataPoint.date));
-                
+
                 description.push('<span style="color:' + $this._getColor("sample-" + dataPoint.probe) + ';">Probe ID: ' + dataPoint.probe + '</span>');
                 description.push("RTT: " + ((dataPoint.min) ? dataPoint.min.toFixed(2) + " | " : "") + ((dataPoint.avg) ? dataPoint.avg.toFixed(2) + " | " : "") + ((dataPoint.max) ? dataPoint.max.toFixed(2) : ""));
 

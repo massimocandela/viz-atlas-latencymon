@@ -5,7 +5,8 @@
  */
 
 define([
-    "latencymon.lib.d3-amd"
+    "latencymon.lib.d3-amd",
+    "latencymon.lib.pathseg"
 ], function(d3) {
     d3.magneticPaths = {
         closestPathPoint: function (pathNode, point) { // Thanks to http://bl.ocks.org/mbostock/8027637

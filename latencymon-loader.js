@@ -26,6 +26,7 @@ requirejs.config({
         "latencymon.lib.bootstrap-table": LATENCYMON_LIB_URL + "bootstrap-table/bootstrap-table.min",
         "latencymon.lib.jquery-amd": LATENCYMON_LIB_URL + "jquery-libs-amd",
         "latencymon.lib.jquery-libs": LATENCYMON_LIB_URL + "jquery-libs",
+        "latencymon.lib.pathseg": LATENCYMON_LIB_URL + "pathseg",
 
 
 
