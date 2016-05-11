@@ -102,7 +102,7 @@ define([
 
 
         this.getChartDom = function () {
-            var probeDom, infoDom, groupDescription, dragIcon, deleteIcon, groupDescriptionText, groupDescriptionDom,
+            var probeDom, infoDom, dragIcon, deleteIcon, groupDescriptionText, groupDescriptionDom,
                 numberDisplayedProbes, displayedProbeListTruncated, explodeIcon;
 
             groupDescriptionText = group.toString();
@@ -758,7 +758,15 @@ define([
                 }).show();
 
                 description = [];
-                description.push("Date: " + utils.dateToString(dataPoint.date));
+
+                if (env.measurements[$this.group.measurementId]["currentResolution"] != "time") {
+                    description.push("Date: " + utils.dateToStringShort(utils.UTCDateToLocalDate(dataPoint.date)) + " UTC" + '<div class="approx-label">Approx</div>');
+                } else {
+                    description.push("Date: " + utils.dateToString(utils.UTCDateToLocalDate(dataPoint.date)));
+                }
+
+                // description.push("Date: " + utils.dateToString(dataPoint.date));
+                
                 description.push('<span style="color:' + $this._getColor("sample-" + dataPoint.probe) + ';">Probe ID: ' + dataPoint.probe + '</span>');
                 description.push("RTT: " + ((dataPoint.min) ? dataPoint.min.toFixed(2) + " | " : "") + ((dataPoint.avg) ? dataPoint.avg.toFixed(2) + " | " : "") + ((dataPoint.max) ? dataPoint.max.toFixed(2) : ""));
 

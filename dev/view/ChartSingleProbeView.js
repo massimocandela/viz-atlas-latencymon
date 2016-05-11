@@ -835,7 +835,11 @@ define([
                 }).show();
 
                 description = [];
-                description.push("Date: " + utils.dateToString(utils.UTCDateToLocalDate(dataPoint.date)));
+                if (env.measurements[$this.group.measurementId]["currentResolution"] != "time") {
+                    description.push("Date: " + utils.dateToStringShort(utils.UTCDateToLocalDate(dataPoint.date)) + " UTC" + '<div class="approx-label">Approx</div>');
+                } else {
+                    description.push("Date: " + utils.dateToString(utils.UTCDateToLocalDate(dataPoint.date)));
+                }
 
                 function pushDescription(key, label){
                     if (dataPoint.original[key] != null && dataPoint[key] != null) {

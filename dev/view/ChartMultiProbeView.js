@@ -1255,7 +1255,13 @@ define([
                 }
 
                 description = [];
-                description.push("Date: " + utils.dateToString(utils.UTCDateToLocalDate(dataPoint.date)));
+
+                if (env.measurements[$this.group.measurementId]["currentResolution"] != "time") {
+                    description.push("Date: " + utils.dateToStringShort(utils.UTCDateToLocalDate(dataPoint.date)) + " UTC" + '<div class="approx-label">Approx</div>');
+                } else {
+                    description.push("Date: " + utils.dateToString(utils.UTCDateToLocalDate(dataPoint.date)));
+                }
+
                 if (dataPoint.original != null) {
                     pushDescription("max", "Max");
                     pushDescription("avg", "Med");
@@ -1273,6 +1279,8 @@ define([
                 }
 
                 popUpDiv.html(description.join("<br>"));
+
+                console.log(popUpDiv.html());
             }, config.hoverPopUpDelay);
 
         };

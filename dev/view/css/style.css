@@ -586,6 +586,15 @@
     margin-bottom: 10px!important;
 }
 
+.approx-label{
+    position: absolute;
+    top: 8px;
+    right: 7px;
+    text-transform: uppercase;
+    color: red;
+    font-weight: bold;
+    font-size: 9px;
+}
 
 /* Bootstrap Hacks */
 .pagination li{
