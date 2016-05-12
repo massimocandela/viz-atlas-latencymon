@@ -17,9 +17,6 @@ define([
         $this = this;
         this.dom = {};
         this.yUnit = "%"; // Default unit
-        // env.dataFilterName = "";
-        // env.dataFilter = new RelativeRTTFilter(env); // Default filter
-
         this.charts = {};
 
         this.addChart = function(group){

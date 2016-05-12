@@ -212,7 +212,7 @@ define([
                 console.log("You can use the following " + measurement.probes.length + " probes: ", $.map(measurement.probes, function(probe){return probe.id}));
                 console.log("Commands available: main.");
                 console.log("addProbe(measurementID, probeID)/addGroup(measurementID, [probes], label, 'multi-probes'|'comparison')");
-                console.log("setDataFilter('neutral'|'relative')");
+                console.log("setDataFilter('natural'|'relative')");
                 console.log("removeMeasurement(measurementId)/mergeMeasurements([measurementIds], mergeSamples)");
                 console.log("setTimeRange(startDate, endDate)");
 

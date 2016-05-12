@@ -5557,6 +5557,14 @@
     margin: auto !important;
     margin-top: 20px !important;
     margin-bottom: 10px !important; }
+  .latencymon-container .approx-label {
+    position: absolute;
+    top: 8px;
+    right: 7px;
+    text-transform: uppercase;
+    color: red;
+    font-weight: bold;
+    font-size: 9px; }
   .latencymon-container .pagination li {
     display: inline !important; }
   .latencymon-container .ui-timepicker-div .ui-widget-header {

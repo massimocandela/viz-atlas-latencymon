@@ -26,6 +26,7 @@
         "latencymon.lib.bootstrap-table": "dev/libs/bootstrap-table/bootstrap-table.min",
         "latencymon.lib.jquery-amd": "dev/libs/jquery-libs-amd",
         "latencymon.lib.jquery-libs": "dev/libs/jquery-libs",
+        "latencymon.lib.pathseg": "dev/libs/pathseg",
 
         "latencymon.lib.d3-magnetic-cursor": "dev/libs/d3-magnetic-cursor",
 
