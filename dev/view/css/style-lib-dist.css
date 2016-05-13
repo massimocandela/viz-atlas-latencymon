@@ -5565,6 +5565,8 @@
     color: red;
     font-weight: bold;
     font-size: 9px; }
+  .latencymon-container .svg-hidden {
+    opacity: 0 !important; }
   .latencymon-container .pagination li {
     display: inline !important; }
   .latencymon-container .ui-timepicker-div .ui-widget-header {
