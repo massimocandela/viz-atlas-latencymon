@@ -8,7 +8,7 @@ define([
     var ChartSingleProbeView = function (env, group) {
         var margin, width, height, x, y, xAxis, yAxis, svg, areas, lines, dots, lineSkeletons, areaSkeletons, $this,
             marginBottomLastItem, marginBottomNormalItem, chartHeight, dotsRadius, probe, popUpDiv, popUpTimer, lastDots,
-            whiteLeftBackground, extraHeight, timePointer;
+            whiteLeftBackground, extraHeight, timePointer, showOnlyAttempt;
 
         this.group = group;
         this.lastUpdateParams = {};
@@ -26,6 +26,7 @@ define([
         areas = {};
         lines = {};
         dots = {};
+        showOnlyAttempt = config.singlePacketOption;
 
         this.getChartDom = function () {
             var probeDom, infoDom, asnRendered, dragIcon, deleteIcon, shortLabel;
@@ -252,6 +253,13 @@ define([
             lastDots = allDots
                 .enter()
                 .append("circle")
+                .attr("class", function(dataPoint){
+                    if (!dataPoint.cut[key]){
+                        return "dot fill-normal-dot " + key + " p" + dataPoint.probe + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
+                    } else {
+                        return "dot fill-cut-dot " + key + " p" + dataPoint.probe + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
+                    }
+                })
                 .attr("r", 15)
                 .transition()
                 .duration(2000)
@@ -261,9 +269,9 @@ define([
             allDots
                 .attr("class", function(dataPoint){
                     if (!dataPoint.cut || !dataPoint.cut[key]){
-                        return "dot fill-normal-dot " + key + " p" + dataPoint.probe;
+                        return "dot fill-normal-dot " + key + " p" + dataPoint.probe + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     } else {
-                        return "dot fill-cut-dot " + key + " p" + dataPoint.probe;
+                        return "dot fill-cut-dot " + key + " p" + dataPoint.probe + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     }
                 })
                 .attr("cx", lineSkeletons[key].x())
@@ -279,6 +287,7 @@ define([
             lines[key]
                 .datum(data)
                 .transition()
+                .attr("class", "line " + key + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden"))
                 .attr("d", lineSkeletons[key]);
         };
 
@@ -287,6 +296,7 @@ define([
             areas[key]
                 .datum(data)
                 .transition()
+                .attr("class", "area " + key + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden"))
                 .attr("d", areaSkeletons[key]);
         };
 
@@ -716,7 +726,7 @@ define([
             return svg
                 .append("path")
                 .datum(data)
-                .attr("class", "area " + key)
+                .attr("class", "area " + key + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden"))
                 .attr("d", areaSkeletons[key]);
         };
 
@@ -745,9 +755,9 @@ define([
                 .append("circle")
                 .attr("class", function(dataPoint){
                     if (!dataPoint.cut[key]){
-                        return "dot fill-normal-dot " + key + " p" + dataPoint.probe;
+                        return "dot fill-normal-dot " + key + " p" + dataPoint.probe + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     } else {
-                        return "dot fill-cut-dot " + key + " p" + dataPoint.probe;
+                        return "dot fill-cut-dot " + key + " p" + dataPoint.probe + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     }
                 })
                 .attr("cx", line.x())
@@ -765,7 +775,7 @@ define([
             return svg
                 .append("path")
                 .datum(data)
-                .attr("class", "line " + key)
+                .attr("class", "line " + key + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden"))
                 .attr("d", line);
         };
 

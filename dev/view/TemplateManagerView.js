@@ -113,6 +113,10 @@ define([
             '<img src="' + widgetUrl + 'view/img/chart_mode.png"/>' +
             '</div>' +
 
+            '<div class="button show-packets">' +
+            '<img src="' + widgetUrl + 'view/img/show_single_packet.png"/>' +
+            '</div>' +
+
                 //'<div class="button filters">' +
                 //'<img src="' + widgetUrl + 'view/img/filter_icon.png"/>' +
                 //'</div>' +

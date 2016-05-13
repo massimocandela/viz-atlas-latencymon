@@ -547,6 +547,8 @@ define([
 
 
         this._fillDomElements = function() {
+            var showPackets;
+
             if (env.parentDom.find(config.domClasses.chartDomClass).length == 0) {
                 this.dom.controllerDiv = $('<div class="controller"></div>');
                 this.dom.chartDiv = $('<div class="chart"></div>').hide();
@@ -656,6 +658,55 @@ define([
 
                         }
                     });
+
+
+                if (config.showMedianByDefault) {
+                    env.showSinglePacket = true;
+                    showPackets = {
+                        class: "single-packet",
+                        title: lang.showOnlySinglePacketTitle.single,
+                        icon: env.widgetUrl + 'view/img/show_single_packet.png'
+                    };
+                } else {
+                    env.showSinglePacket = false;
+
+                    showPackets = {
+                        class: "all",
+                        title: lang.showOnlySinglePacketTitle.all,
+                        icon: env.widgetUrl + 'view/img/show_all_values.png'
+                    };
+                }
+
+                env.parentDom
+                    .find(".show-packets")
+                    .addClass(showPackets.class)
+                    .attr("title", showPackets.title)
+                    .on("click", function(){
+                        var element = $(this);
+
+                        if (element.is(".single-packet")){
+                            env.showSinglePacket = false;
+                            element.removeClass("single-packet").addClass("all")
+                                .attr("title", lang.showOnlySinglePacketTitle.all)
+                                .find("img")
+                                .attr("src", env.widgetUrl + 'view/img/show_all_values.png');
+                            // env.main.setDataFilter("natural");
+                            env.main.error(lang.allValuesInfo, "info");
+                        } else {
+                            env.showSinglePacket = true;
+
+                            element.removeClass("all").addClass("single-packet")
+                                .attr("title", lang.showOnlySinglePacketTitle.single)
+                                .find("img")
+                                .attr("src", env.widgetUrl + 'view/img/show_single_packet.png');
+
+                            // env.main.setDataFilter("relative");
+                            env.main.error(lang.singlePacketValuesInfo, "info");
+                        }
+                        $this.renderOrUpdateAll(true);
+                    })
+                    .find("img")
+                    .attr("src", showPackets.icon);
 
                 env.parentDom.find(".open-add-line-panel")
                     .on("click", function(){

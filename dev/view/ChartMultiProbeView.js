@@ -9,7 +9,7 @@ define([
     var ChartMultiProbeView = function (env, group) {
         var margin, width, height, x, y, xAxis, yAxis, svg, areas, lines, dots, lineSkeletons, areaSkeletons, $this,
             marginBottomLastItem, marginBottomNormalItem, chartHeight, dotsRadius, popUpDiv, popUpTimer, extraHeight,
-            timePointer, whiteLeftBackground, averageSeriesCache, lastTimeWindow, lastDomainRedrawn, currentSeries;
+            timePointer, whiteLeftBackground, averageSeriesCache, lastDomainRedrawn, currentSeries, showOnlyAttempt;
 
         this.group = group;
         this.lastUpdateParams = {};
@@ -26,7 +26,7 @@ define([
         lines = {};
         dots = {};
         averageSeriesCache = [];
-
+        showOnlyAttempt = config.singlePacketOption;
 
         this._getAllDataPointsMixed = function(){
             var allSamples, probe;
@@ -193,7 +193,7 @@ define([
 
 
         this._computeAvgSample = function(minValues, avgValues, maxValues, originalMin, originalAvg, originalMax, computedDate, packetSentArray, packetReceivedArray, whoReplied){
-            var computedMin, computedAvg, computedMax, fakeSample, packetLoss, computedOriginalMin, packetReceived,
+            var computedMin, computedAvg, computedMax, fakeSample, computedOriginalMin, packetReceived,
                 computedOriginalAvg, computedOriginalMax, packetSent;
 
             computedMin = (minValues.length > 0) ?
@@ -576,16 +576,16 @@ define([
 
             data = [];
 
-            for (var n=0,length=originalData.length; n<length; n++){
+            for (var n = 0, length = originalData.length; n < length; n++) {
                 item = originalData[n];
-                if (item != null && item[key] != null && item["packetLoss"] < 1){
+                if (item != null && item[key] != null && item["packetLoss"] < 1) {
                     data.push(item);
                 }
             }
 
             dots = svg
                 .selectAll(".dot." + key)
-                .data(data, function(dataPoint){
+                .data(data, function (dataPoint) {
                     return dataPoint.date.getTime();
                 });
 
@@ -601,7 +601,7 @@ define([
                 .attr("r", 3);
 
             enteringDots
-                .filter(function(dataPoint){
+                .filter(function (dataPoint) {
                     return dataPoint.date >= new Date(currentSeries.lastBucketKey * 1000);
                 })
                 .attr("r", 15)
@@ -610,24 +610,27 @@ define([
                 .attr("r", 3);
 
             dots
-                .attr("class", function(dataPoint){
-                    if (!dataPoint.cut || !dataPoint.cut[key]){
-                        return "dot fill-normal-dot " + key + " p" + $this.group.id;
+                .attr("class", function (dataPoint) {
+                    if (!dataPoint.cut || !dataPoint.cut[key]) {
+                        return "dot fill-normal-dot " + key + " p" + $this.group.id + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     } else {
-                        return "dot fill-cut-dot " + key + " p" + $this.group.id;
+                        return "dot fill-cut-dot " + key + " p" + $this.group.id + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     }
                 })
                 .attr("cx", lineSkeletons[key].x())
                 .attr("cy", lineSkeletons[key].y());
-
         };
 
 
         this.updateLine = function (data, key) {
-            lines[key]
-                .datum(data)
-                .transition()
-                .attr("d", lineSkeletons[key]);
+
+            if (lines[key]) {
+                lines[key]
+                    .datum(data)
+                    .transition()
+                    .attr("class", "line " + key + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden"))
+                    .attr("d", lineSkeletons[key]);
+            }
         };
 
 
@@ -635,6 +638,7 @@ define([
             areas[key]
                 .datum(data)
                 .transition()
+                .attr("class", "area " + key + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden"))
                 .attr("d", areaSkeletons[key]);
         };
 
@@ -1158,12 +1162,12 @@ define([
                     return lowerPoint;
                 });
 
-
             return svg
                 .append("path")
                 .datum(data)
-                .attr("class", "area " + key)
+                .attr("class", "area " + key + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden"))
                 .attr("d", areaSkeletons[key]);
+
         };
 
 
@@ -1172,42 +1176,43 @@ define([
 
             data = [];
 
-            for (var n=0,length=originalData.length; n<length; n++){
+            for (var n = 0, length = originalData.length; n < length; n++) {
                 item = originalData[n];
-                if (item != null && item[key] != null && item["packetLoss"] < 1){
+                if (item != null && item[key] != null && item["packetLoss"] < 1) {
                     data.push(item);
                 }
             }
 
+
             return svg
                 .selectAll(".dot." + key)
-                .data(data, function(dataPoint){
+                .data(data, function (dataPoint) {
                     return dataPoint.date.getTime();
                 })
                 .enter()
                 .append("circle")
-                .attr("class", function(dataPoint){
-                    if (!dataPoint.cut || !dataPoint.cut[key]){
-                        return "dot fill-normal-dot " + key + " p" + $this.group.id;
+                .attr("class", function (dataPoint) {
+                    if (!dataPoint.cut || !dataPoint.cut[key]) {
+                        return "dot fill-normal-dot " + key + " p" + $this.group.id + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     } else {
-                        return "dot fill-cut-dot " + key + " p" + $this.group.id;
+                        return "dot fill-cut-dot " + key + " p" + $this.group.id + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     }
                 })
                 .attr("cx", line.x())
                 .attr("cy", line.y())
-                .attr("r", function(d){
+                .attr("r", function (d) {
                     d.rendered = true;
                     return dotsRadius;
                 })
-
         };
 
 
         this.drawLine = function (data, key, line) {
+
             return svg
                 .append("path")
                 .datum(data)
-                .attr("class", "line " + key)
+                .attr("class", "line " + key + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden"))
                 .attr("d", line);
         };
 
@@ -1280,7 +1285,6 @@ define([
 
                 popUpDiv.html(description.join("<br>"));
 
-                console.log(popUpDiv.html());
             }, config.hoverPopUpDelay);
 
         };

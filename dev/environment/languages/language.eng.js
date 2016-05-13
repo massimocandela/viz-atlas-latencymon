@@ -24,6 +24,7 @@ define([], function(){
             absolute: "Switch to relative values",
             relative: "Switch to absolute values"
         },
+
         absoluteValuesInfo: "The charts now show absolute values",
         relativeValuesInfo: "The charts now show relative values (the 0 is the minimum of the collected latencies)",
 
@@ -50,6 +51,17 @@ define([], function(){
             notValidGroupName: "The group name can contain only letters and numbers"
         },
 
-        measurementAdded: "Measurement loaded. Add now the probes/groups you want to display"
+        measurementAdded: "Measurement loaded. Add now the probes/groups you want to display",
+
+
+        
+        showOnlySinglePacketTitle: {
+            single: "Show all 3 packets received",
+            all: "Show only median values"
+        },
+
+        allValuesInfo: "All the three packets of each ping attempt are shown",
+        singlePacketValuesInfo: "Only the median value of each ping attempt is shown"
+
     }
 });

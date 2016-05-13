@@ -62,6 +62,8 @@ define([], function(){
         permalinkEnabled: true,
         maxNumberOfDisplayedProbesOnChartInfo: 16,
         groupNameRegex: /^[a-z0-9- ]+$/i,
+        showMedianByDefault: true,
+        singlePacketOption: "min", // min, avg, or max
 
         aboutUrl: "https://labs.ripe.net/Members/massimo_candela/new-ripe-atlas-tool-latencymon",
         embedCodeUrl: "https://atlas.ripe.net/docs/tools-latencymon/#embed",

@@ -596,6 +596,10 @@
     font-size: 9px;
 }
 
+.svg-hidden{
+    opacity: 0!important;
+}
+
 /* Bootstrap Hacks */
 .pagination li{
     display: inline !important;
