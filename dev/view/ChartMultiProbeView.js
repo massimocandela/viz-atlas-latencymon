@@ -921,6 +921,7 @@ define([
             if ($this.minOfSamples  && $this.minOfSamples != Infinity) {
                 groupDom
                     .select(".label-min")
+                    .style("visibility", "visible")
                     .text(function () {
                         var label;
 
@@ -931,6 +932,10 @@ define([
 
                         return label;
                     });
+            } else {
+                groupDom
+                    .select(".label-min")
+                    .style("visibility", "hidden");
             }
 
             svg.select(".x.axis")
