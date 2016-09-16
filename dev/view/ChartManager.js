@@ -660,7 +660,7 @@ define([
                     });
 
 
-                if (config.showMedianByDefault) {
+                if (env.showMinimumByDefault) {
                     env.showSinglePacket = true;
                     showPackets = {
                         class: "single-packet",

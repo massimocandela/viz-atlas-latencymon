@@ -12,7 +12,7 @@ define([], function(){
             meta: "https://atlas.ripe.net/api/v2/measurements/0000/routequake/meta.jsonp"
         },
         probeInfoPageUrl: "https://atlas.ripe.net/probes/%p/",
-        streamingUrl: "https://atlas-stream.ripe.net:443",
+        streamingUrl: "https://stream02.atlas.ripe.net:443",
         maxProbes: 8,
         autoMergeSameTargetMeasurement: false,
         autoMergeSamplesSameProbeDifferentMeasurement: true,
@@ -62,7 +62,7 @@ define([], function(){
         permalinkEnabled: true,
         maxNumberOfDisplayedProbesOnChartInfo: 16,
         groupNameRegex: /^[a-z0-9- ]+$/i,
-        showMedianByDefault: true,
+        showMinimumByDefault: true,
         singlePacketOption: "min", // min, avg, or max
 
         aboutUrl: "https://labs.ripe.net/Members/massimo_candela/new-ripe-atlas-tool-latencymon",
