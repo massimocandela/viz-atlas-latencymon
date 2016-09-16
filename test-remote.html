@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://atlas.ripe.net/resource/latencymon/latencymon-widget-main.js"></script>
+<div id="place-here"></div>
+<script>
+    initLatencymon(
+            '#place-here',
+            {}, // Tool options, see table below for more info
+            {
+                dataFilter: "natural",
+                measurements:[1791207, 2083078]
+            } // Query options, see table below for more info
+    );
+</script>
+</body>
+</html>

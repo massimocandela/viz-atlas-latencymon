@@ -1,0 +1,15 @@
+<script src="https://atlas.ripe.net/resource/latencymon/latencymon-widget-main.js"></script>
+<div id="place-here"></div>
+<script>
+    initLatencymon(
+            '#place-here',
+            {autoStartGrouping: false}, // Tool options, see table below for more info
+            {
+                measurements:[1005, 2005],
+                groups: [
+                    {measurementId:1005, probes:[2886,3046,3111,3118], id:"i-root-v4", type:"multi-probes"},
+                    {measurementId:2005, probes:[2886,3046,3111,3118], id:"i-root-v6", type:"multi-probes"}
+                ]
+            }
+    );
+</script>

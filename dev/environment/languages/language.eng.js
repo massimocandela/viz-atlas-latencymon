@@ -57,11 +57,11 @@ define([], function(){
         
         showOnlySinglePacketTitle: {
             single: "Show all 3 packets received",
-            all: "Show only median values"
+            all: "Show only minimum values"
         },
 
         allValuesInfo: "All the three packets of each ping attempt are shown",
-        singlePacketValuesInfo: "Only the median value of each ping attempt is shown"
+        singlePacketValuesInfo: "Only the minimum value of each ping attempt is shown"
 
     }
 });

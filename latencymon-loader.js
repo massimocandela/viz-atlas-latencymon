@@ -133,6 +133,7 @@ define([
             "groupingType": instanceParams.groupingType,
             "groupingLabelReplace": (instanceParams.groupingLabelReplace != undefined) ? instanceParams.groupingLabelReplace : {},
             "parentDom": $(parentDom),
+            "showMinimumByDefault": (instanceParams.showMinimumByDefault != undefined) ? instanceParams.showMinimumByDefault : config.showMinimumByDefault,
             "queryParams": queryParams
         };
 

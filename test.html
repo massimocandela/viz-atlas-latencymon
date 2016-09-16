@@ -1,0 +1,84 @@
+
+<!-- The following file is needed for the streaming -->
+<script src="http://stream02.atlas.ripe.net/socket.io.js"></script>
+<script>
+    var socket, howmany, printReceivedSamples;
+
+    printReceivedSamples = true;
+
+    // Create a connection
+//    socket = io("https://stream-dev.atlas.ripe.net:443", { path : "/stream/socket.io" });
+        socket = io("https://atlas-stream.ripe.net:443", { path : "/stream/socket.io" });
+//        socket = io("http://stream02.atlas.ripe.net:80", { path : "/stream/socket.io" });
+
+    // Counter of items received
+//    howmany = 0;
+//    setInterval(function(){
+//        console.log(howmany);
+//    }, 10000);
+
+    // Declare a callback to be executed when a measurement result is received
+    socket.on("atlas_probestatus", function(result){
+//        howmany++;
+//        if (printReceivedSamples){
+            console.log("atlas_probestatus", result);
+//        }
+    });
+
+    window.show = false;
+    socket.on("atlas_metadata", function(result){
+        console.log("atlas_metadata", result);
+    });
+
+    socket.on("atlas_result", function(result){
+//        howmany++;
+//        if (printReceivedSamples){
+//        if (window.show){
+            console.log("atlas_result", result);
+//        }
+//        }
+    });
+//    socket.on("atlas_metadata", function(result){
+//        console.log("atlas_metadata", result);
+//
+//        var msmID = result.id;
+//
+//        socket.emit("atlas_subscribe", { stream_type: "result", msm: msmID }); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//
+//    });
+
+    socket.on("atlas_error", function(result) {
+        console.log(result);
+    });
+
+
+
+
+    // Subscribe to results coming from all the probes involved in the measurement 2340408
+//    socket.emit("atlas_subscribe", { stream_type: "probestatus" }); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+
+//    socket.emit("atlas_subscribe", { stream_type: "result", destinationPrefix: "192/8"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "result", type: "dns", destinationPrefix: "200/8"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "result", type: "dns", destinationPrefix: "176/8"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "result", destinationAddress: "193.0.0.166"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "result", type: "ping", acceptedFields: ["msm_id"]}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "result", type: "traceroute"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "result", type: "traceroute", passThroughHost: "172.24.0.1"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "result", type: "traceroute", passThroughHost: "203.178.137.194"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "result", type: "traceroute", passThroughPrefix: "123/8"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "result", msm: 1791207}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "probestatus", sendBacklog: true}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "probestatus",  sendBacklog: true}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    socket.emit("atlas_subscribe", { stream_type: "result", type: "ping"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+    //type: "ping", sendBacklog: true
+
+var inc = 0;
+
+//    for (var n=0; n<100; n++) {
+//        inc ++ ;
+        socket.emit("atlas_subscribe", { stream_type: "result", type: "traceroute"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+//    }
+
+</script>
+
+
