@@ -13,11 +13,21 @@
     min-width: 860px!important;
 }
 
+.only-chart .latencymon-content{
+    border: 0;
+}
+
 .chart-item{
     background-image: url('../img/latencymon_watermark.svg');
     background-repeat: no-repeat;
     background-position: 65px 10px;
     background-size: 100px 30px;
+}
+
+.only-chart .chart-item {
+    border: 0!important;
+    margin: 0!important;
+    box-shadow: none!important;
 }
 
 .watermark-color{
@@ -150,6 +160,10 @@
     text-shadow: 1px 1px 3px #C0C0C0;
 }
 
+.only-chart .probe-single-info {
+    display: none;
+}
+
 .probe-single-info .probe-info-line{
     width: 98%;
     margin-left: 3px;
@@ -164,6 +178,11 @@
     top: 8px;
     text-shadow: 1px 1px 3px #C0C0C0;
 }
+
+.only-chart .probe-multi-info {
+    display: none;
+}
+
 
 .probe-multi-info .probe-info-line{
     width: 98%;
@@ -184,12 +203,21 @@
     cursor: pointer;
 }
 
+.only-chart .drag-icon {
+    display: none;
+}
+
 .delete-icon{
     position: absolute;
     right: 22px;
     top: 3px;
     cursor: pointer;
 }
+
+.only-chart .delete-icon {
+    display: none;
+}
+
 
 .explode-icon{
     position: absolute;
@@ -198,6 +226,9 @@
     cursor: pointer;
 }
 
+.only-chart .explode-icon {
+    display: none;
+}
 
 
 .chart-placeholder {
@@ -295,6 +326,9 @@
     border-radius: 5px;
 }
 
+.only-chart .button-group{
+    display: none;
+}
 
 .dropdown-panel{
     width: 950px;
@@ -416,6 +450,10 @@
 
 .time-overview-dom{
     margin: 12px;
+}
+
+.only-chart .time-overview-dom {
+    display: none;
 }
 
 
@@ -540,6 +578,10 @@
     padding-top: 2px;
 }
 
+.only-chart .info-header {
+    display: none;
+}
+
 .info-header .left-info{
     width: 500px;
     float: left;
@@ -564,6 +606,10 @@
     padding-left: 5px;
     padding-right: 5px;
     font-size: 13px;
+}
+
+.only-chart .latencymon-footer {
+    display: none;
 }
 
 .footer-item{

@@ -199,6 +199,9 @@ define([
         this.dom = {};
 
         env.parentDom.addClass("latencymon-container");
+        if (env.onlyChartMode){
+            env.parentDom.addClass("only-chart");
+        }
         this.dom.main = $("<div></div>").addClass("latencymon-content").appendTo(env.parentDom);
 
         this.dom.loadingImage = $(this.loadingImage).appendTo(this.dom.main);

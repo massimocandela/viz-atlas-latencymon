@@ -131,6 +131,8 @@ define([
             "syncWithRealTimeData": (instanceParams.syncWithRealTimeData != undefined) ? instanceParams.syncWithRealTimeData : config.syncWithRealTimeData,
             "autoStartGrouping": (instanceParams.autoStartGrouping != undefined) ? instanceParams.autoStartGrouping : config.autoStartGrouping,
             "groupingType": instanceParams.groupingType,
+            "onlyChartMode": instanceParams.onlyChartMode,
+            "onTimeRangeChange": instanceParams.onTimeRangeChange,
             "groupingLabelReplace": (instanceParams.groupingLabelReplace != undefined) ? instanceParams.groupingLabelReplace : {},
             "parentDom": $(parentDom),
             "showMinimumByDefault": (instanceParams.showMinimumByDefault != undefined) ? instanceParams.showMinimumByDefault : config.showMinimumByDefault,

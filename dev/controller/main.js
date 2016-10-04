@@ -165,6 +165,9 @@ define([
                 env.endDate = endDate;
                 env.isUpdatable = this._isUpdatable();
 
+                if (env.onTimeRangeChange){
+                    env.onTimeRangeChange(startDate, endDate);
+                }
                 calls = [];
                 for (var groupId in this.groups) {
                     groupTmp = this.groups[groupId];

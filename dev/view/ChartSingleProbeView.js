@@ -416,7 +416,12 @@ define([
                 extraHeight = 0;
             }
 
-            width = this.group.dom.innerWidth() - margin.left - margin.right - config.probeDescriptionDomWidth;
+            if (env.onlyChartMode){
+                width = this.group.dom.innerWidth() - margin.left;
+            } else {
+                width = this.group.dom.innerWidth() - margin.left - margin.right - config.probeDescriptionDomWidth;
+            }
+
             height = chartHeight + extraHeight - margin.top - margin.bottom;
 
             computedYRange = (yRange) ? $.map(yRange, function(n){return (height/(yRange.length - 1)) * n}) : [height, 0];
@@ -521,7 +526,12 @@ define([
                 extraHeight = 0;
             }
 
-            width = this.group.dom.innerWidth() - margin.left - margin.right - config.probeDescriptionDomWidth;
+            if (env.onlyChartMode){
+                width = this.group.dom.innerWidth() - margin.left;
+            } else {
+                width = this.group.dom.innerWidth() - margin.left - margin.right - config.probeDescriptionDomWidth;
+            }
+
             height = chartHeight + extraHeight - margin.top - margin.bottom;
 
             computedYRange = (yRange) ? $.map(yRange, function(n){return (height/(yRange.length - 1)) * n}) : [height, 0];
