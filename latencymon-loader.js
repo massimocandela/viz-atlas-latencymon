@@ -133,6 +133,7 @@ define([
             "groupingType": instanceParams.groupingType,
             "onlyChartMode": instanceParams.onlyChartMode,
             "onTimeRangeChange": instanceParams.onTimeRangeChange,
+            "permalinkEnabled": (instanceParams.permalinkEnabled != undefined) ? instanceParams.permalinkEnabled : config.permalinkEnabled,
             "groupingLabelReplace": (instanceParams.groupingLabelReplace != undefined) ? instanceParams.groupingLabelReplace : {},
             "parentDom": $(parentDom),
             "showMinimumByDefault": (instanceParams.showMinimumByDefault != undefined) ? instanceParams.showMinimumByDefault : config.showMinimumByDefault,

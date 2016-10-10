@@ -118,7 +118,7 @@ define([
             currentUrl = $this.getCurrentUrl();
 
             try{
-                if (config.permalinkEnabled && window.history && window.history.replaceState && currentUrl) {
+                if (env.permalinkEnabled && window.history && window.history.replaceState && currentUrl) {
 
                     try {
                         window.history.replaceState({}, 'latencymon_state', currentUrl);
