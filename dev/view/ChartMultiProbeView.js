@@ -1014,10 +1014,6 @@ define([
                 .append("svg");
 
             svgElement
-                .append("rect")
-                .attr("class", "selection-rect");
-
-            svgElement
                 .attr("class", "chart-svg")
                 .on("mousedown", function(){
                     env.selectionOngoing = true;
@@ -1035,7 +1031,15 @@ define([
                             .attr("width", 0);
 
                         if (Math.abs(env.selectionStartPoint - env.selectionEndPoint) > config.minimumPixelSelectable) {
-                            env.main.setTimeRange(x.invert(Math.min(env.selectionStartPoint, env.selectionEndPoint)), x.invert(Math.max(env.selectionEndPoint, env.selectionStartPoint)))
+                            var startDate, endDate;
+
+                            startDate = x.invert(Math.min(env.selectionStartPoint, env.selectionEndPoint));
+                            endDate = x.invert(Math.max(env.selectionEndPoint, env.selectionStartPoint));
+
+                            if (env.onTimeRangeChange){
+                                env.onTimeRangeChange(startDate, endDate);
+                            }
+                            env.main.setTimeRange(startDate, endDate);
                         }
                     }
                 })
@@ -1093,6 +1097,10 @@ define([
                 .style("visibility", "hidden")
                 .attr("x1", 0).attr("x2", 0)
                 .attr("y1", 0).attr("y2", height + margin.top);
+
+            svgElement
+                .append("rect")
+                .attr("class", "selection-rect");
 
             $(this.group.dom)
                 .mousemove(function(event) {
