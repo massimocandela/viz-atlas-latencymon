@@ -22,7 +22,7 @@ define([
 
         this.exposedMethods = ["setStringTimeRange", "setTimeRange", "addMeasurementAndGroup", "autoGroupMeasurements",
             "addMeasurement", "addProbes", "addProbe", "addGroup", "removeGroup", "removeProbe", "setDataFilter",
-            "mergeMeasurements", "removeMeasurement", "init"];
+            "mergeMeasurements", "removeMeasurement", "updateExternalTimeCursor", "init"];
 
         env.template = new TemplateManagerView(env);
         env.connector = new ConnectorFacade(env);
@@ -165,9 +165,6 @@ define([
                 env.endDate = endDate;
                 env.isUpdatable = this._isUpdatable();
 
-                if (env.onTimeRangeChange){
-                    env.onTimeRangeChange(startDate, endDate);
-                }
                 calls = [];
                 for (var groupId in this.groups) {
                     groupTmp = this.groups[groupId];
@@ -523,6 +520,11 @@ define([
             env.measurements[newMergedId] = measurementFinal;
         };
 
+        this.updateExternalTimeCursor = function (timestamp) {
+          if (env.onlyChartMode) {
+              env.chartManager.updateExternalTimeCursor(utils.timestampToUTCDate(timestamp));
+          }
+        };
 
         this.removeMeasurement = function(measurementId){
 
@@ -577,6 +579,8 @@ define([
                 if (!env.timeDomain){
                     env.startDate = utils.timestampToUTCDate(conf.startTimestamp);
                     env.endDate = utils.timestampToUTCDate(conf.stopTimestamp);
+
+                    console.log(env.startDate, env.endDate);
                     env.timeWindowSize = env.endDate - env.startDate;
                     env.isUpdatable = this._isUpdatable();
                 } else {

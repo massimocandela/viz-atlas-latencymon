@@ -45,6 +45,12 @@ define([
             this.renderOrUpdateAll(true);
         };
 
+        this.updateExternalTimeCursor = function(date){
+            for (var chart in this.charts){
+                this.charts[chart].updateExternalTimeCursor(date);
+            }
+        };
+
         this._getUpdatableValue = function(){
             if (env.isUpdatable) {
                 for (var measurementId in env.originalMeasurements) {
@@ -233,99 +239,6 @@ define([
 
             return {domain: [minYvalue, maxYvalue], unit: this.yUnit};
         };
-
-
-        //this._getYDomainAndRangeOrdinal = function (lowerbound, upperbound, xDomain) {
-        //    var logValue, values, manipulateSamples, value, percentileDomain, roundedLogValue, computedRange, accuracy,
-        //        groupView, data, chartKey, probe;
-        //
-        //    values = [];
-        //    percentileDomain = [];
-        //
-        //    manipulateSamples = function(data){
-        //        var item;
-        //        for (var n=0,length=data.length; n<length; n++) {
-        //            item = data[n];
-        //            if (item.min != null){
-        //                values.push(item.min);
-        //            }
-        //
-        //            if (item.avg != null){
-        //                values.push(item.avg);
-        //            }
-        //
-        //            if (item.max != null){
-        //                values.push(item.max);
-        //            }
-        //        }
-        //    };
-        //
-        //    for (chartKey in $this.charts){
-        //        groupView = $this.charts[chartKey];
-        //        data = groupView.getGraphicalSamples(xDomain);
-        //
-        //        if (data && data.length > 0){
-        //            manipulateSamples(data);
-        //        }
-        //
-        //    }
-        //
-        //    values = values.sort();
-        //
-        //    function computeRange(accuracy) {
-        //        var position, elementWeight, noDuplicates, logarithmicScale, logarithmicCeiledScale;
-        //
-        //        noDuplicates = [];
-        //        logarithmicScale = [];
-        //        logarithmicCeiledScale = [];
-        //        elementWeight = [];
-        //
-        //        for (var n = 0, length = values.length; n < length; n++) {
-        //            value = Math.round(values[n] * accuracy) / accuracy;
-        //            logValue = parseFloat(Math.log(value).toFixed(2));
-        //            roundedLogValue = Math.ceil(logValue);
-        //            //roundedLogValue = logValue;
-        //            position = -1;
-        //            for (var i=0; i<=5 && position==-1; i++){
-        //                position = logarithmicScale.indexOf(roundedLogValue - i);
-        //            }
-        //
-        //            if (position == -1 && noDuplicates.indexOf(value) == -1) {
-        //                noDuplicates.push(value);
-        //                logarithmicCeiledScale.push(roundedLogValue);
-        //                logarithmicScale.push(logValue);
-        //            } else {
-        //                elementWeight[position] = (!elementWeight[position]) ? 0 : elementWeight[position] + 1;
-        //            }
-        //        }
-        //
-        //        logarithmicScale = logarithmicScale.sort(function (a, b) {
-        //            return a - b;
-        //        });
-        //
-        //        noDuplicates = noDuplicates.sort(function (a, b) {
-        //            return a - b;
-        //        });
-        //
-        //        return [noDuplicates, logarithmicCeiledScale, logarithmicScale, elementWeight]
-        //    }
-        //
-        //    accuracy = 10000;
-        //    computedRange = computeRange(accuracy);
-        //
-        //    while (computedRange[2].length > 10){
-        //        accuracy = accuracy / 2;
-        //        computedRange = computeRange(accuracy);
-        //    }
-        //
-        //    for (var n=computedRange[2].length-1; n>= 0; n--) {
-        //        percentileDomain.push(computedRange[3][n] || n);
-        //    }
-        //
-        //    return {domain: computedRange[0], range: percentileDomain, unit: this.yUnit};
-        //};
-
-
 
 
         this._getYDomainAndRangeOrdinal = function(lowerbound, upperbound, xDomain){

@@ -1102,6 +1102,14 @@ define([
                 .append("rect")
                 .attr("class", "selection-rect");
 
+            if (env.onlyChartMode) {
+                this.externalTimeCursor = svgElement
+                    .append("svg:line")
+                    .attr("class", "external-time-cursor")
+                    .attr("x1", 0).attr("x2", 0)
+                    .attr("y1", 0).attr("y2", height + margin.top);
+            }
+
             $(this.group.dom)
                 .mousemove(function(event) {
                     var xPosition, timePointerXPosition, dataSampleHovered;
@@ -1133,6 +1141,16 @@ define([
                     $this.hidePopUp();
                 });
 
+        };
+
+
+        this.updateExternalTimeCursor = function(date){
+            if (this.externalTimeCursor) {
+                var position = x(date);
+                this.externalTimeCursor
+                    .attr("x1", position + margin.left)
+                    .attr("x2", position + margin.left);
+            }
         };
 
 

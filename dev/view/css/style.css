@@ -22,6 +22,7 @@
     background-repeat: no-repeat;
     background-position: 65px 10px;
     background-size: 100px 30px;
+    background-color: transparent!important;
 }
 
 .only-chart .chart-item {
@@ -644,6 +645,18 @@
 
 .svg-hidden{
     opacity: 0!important;
+}
+
+.time-cone-rect{
+    stroke: #dbe0f6;
+    stroke-width: 1px;
+    /*stroke-dasharray: 3, 3;*/
+    fill: #dbe0f6;
+}
+
+.external-time-cursor{
+    stroke: #74ae01;
+    stroke-width: 2px;
 }
 
 /* Bootstrap Hacks */
