@@ -8,11 +8,11 @@ define([], function(){
     return {
         widgetPrefix: "lm",
         dataAPIs: {
-            results: "https://atlas.ripe.net/api/v2/measurements/0000/routequake/results.jsonp",
-            meta: "https://atlas.ripe.net/api/v2/measurements/0000/routequake/meta.jsonp"
+            results: "https://atlas.ripe.net/api/v2/measurements/0000/routequake/results/",
+            meta: "https://atlas.ripe.net/api/v2/measurements/0000/routequake/meta/"
         },
         probeInfoPageUrl: "https://atlas.ripe.net/probes/%p/",
-        streamingUrl: "https://stream02.atlas.ripe.net:443",
+        streamingUrl: "https://atlas-stream.ripe.net:443",
         maxProbes: 8,
         autoMergeSameTargetMeasurement: false,
         autoMergeSamplesSameProbeDifferentMeasurement: true,
