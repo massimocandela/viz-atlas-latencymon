@@ -710,8 +710,22 @@ define([
                 .replace(/&lt;/g, '<')
                 .replace(/&gt;/g, '>')
                 .replace(/&amp;/g, '&');
+        },
+
+        getIdFromIp: function(ip){
+            ip = ip.replace(/\./g, "\\.");
+            ip = ip.replace(/\:/g, "\\:");
+            ip = ip.replace(/\*/g, "\\*");
+
+            return ip;
+        },
+
+        getIpFromId: function(id){
+            id = id.replace(/\\\./g, ".");
+            id = id.replace(/\\\:/g, ":");
+            id = id.replace(/\\\*/g, "*");
+
+            return id;
         }
-
-
     }
 });

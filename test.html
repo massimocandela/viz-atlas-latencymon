@@ -1,6 +1,6 @@
 
 <!-- The following file is needed for the streaming -->
-<script src="http://stream02.atlas.ripe.net/socket.io.js"></script>
+<script src="http://atlas-stream.ripe.net/socket.io.js"></script>
 <script>
     var socket, howmany, printReceivedSamples;
 
@@ -77,7 +77,19 @@ var inc = 0;
 //    for (var n=0; n<100; n++) {
 //        inc ++ ;
         socket.emit("atlas_subscribe", { stream_type: "result", type: "traceroute"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
-//    }
+//        socket.emit("atlas_subscribe", { stream_type: "result", type: "traceroute"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+
+//    socket.emit("atlas_result", {
+//        stream_type: "result",
+////        speed: 600,
+////        sendBacklog: true
+////        msm: 10301,
+////        startTime: 1425623200
+//    });
+
+
+
+    //    }
 
 </script>
 

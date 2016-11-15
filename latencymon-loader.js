@@ -154,16 +154,18 @@ define([
 
         if (!instanceParams.dev){
             styleDownloads = [
+                // LATENCYMON_LIB_URL + "jquery/jquery-ui-2.min.css",
                 LATENCYMON_VIEW_URL + "css/style-lib-dist.min.css"
             ];
         } else {
 
             styleDownloads = [
                 LATENCYMON_VIEW_URL + "css/style.css",
-                LATENCYMON_LIB_URL + "jquery/jquery-ui.min.css",
+                // LATENCYMON_LIB_URL + "jquery/jquery-ui.min.css",
                 LATENCYMON_LIB_URL + "bootstrap/css/bootstrap.min.css",
                 LATENCYMON_LIB_URL + "bootstrap/css/bootstrap-theme.min.css",
                 LATENCYMON_LIB_URL + "bootstrap-table/bootstrap-table.min.css"
+                // LATENCYMON_LIB_URL + "bootstrap-table/bootstrap-table.min.css"
             ];
 
         }

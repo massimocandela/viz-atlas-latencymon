@@ -446,13 +446,13 @@ define([
                 numberDisplayedProbes++;
                 if (numberDisplayedProbes <= config.maxNumberOfDisplayedProbesOnChartInfo) {
                     probeId = probe.id;
-                    groupDescriptionDom.push(' <span data-group-id="' + group.id + '" data-probe-id="' + probeId + '" class="probe-listed" title="' + probeId + ' (no data)">' + probeId + '</span>');
+                    groupDescriptionDom.push(' <span data-group-id="' + utils.getIdFromIp(group.id) + '" data-probe-id="' + probeId + '" class="probe-listed" title="' + probeId + ' (no data)">' + probeId + '</span>');
                 } else {
                     displayedProbeListTruncated = true;
                 }
             });
 
-            probeDom = $('<div class="chart-item probe-multi-chart" id="chart-probe-' + group.id + '"></div>');
+            probeDom = $('<div class="chart-item probe-multi-chart" id="chart-probe-' + utils.getIdFromIp(group.id) + '"></div>');
             infoDom = $('<div class="probe-multi-info"></div>')
                 .height(chartHeight)
                 .width(config.probeDescriptionDomWidth);
@@ -499,7 +499,7 @@ define([
 
 
         this.isLast = function () {
-            return env.parentDom.find('.chart-item').last().attr('id').replace('chart-probe-', '') == this.group.id;
+            return env.parentDom.find('.chart-item').last().attr('id').replace('chart-probe-', '') == utils.getIdFromIp(this.group.id);
         };
 
 
@@ -612,9 +612,9 @@ define([
             dots
                 .attr("class", function (dataPoint) {
                     if (!dataPoint.cut || !dataPoint.cut[key]) {
-                        return "dot fill-normal-dot " + key + " p" + $this.group.id + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
+                        return "dot fill-normal-dot " + key + " p" + utils.getIdFromIp($this.group.id) + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     } else {
-                        return "dot fill-cut-dot " + key + " p" + $this.group.id + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
+                        return "dot fill-cut-dot " + key + " p" + utils.getIdFromIp($this.group.id) + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     }
                 })
                 .attr("cx", lineSkeletons[key].x())
@@ -1130,7 +1130,7 @@ define([
                         $this.showPopUp(timePointerXPosition, dataSampleHovered);
 
                         d3
-                            .selectAll(".p" + $this.group.id + ".dot[cx=\"" + xPosition + "\"]")
+                            .selectAll(".p" + utils.getIdFromIp($this.group.id) + ".dot[cx=\"" + xPosition + "\"]")
                             .attr("r", 7)
                             .transition()
                             .duration(2000)
@@ -1233,9 +1233,9 @@ define([
                 .append("circle")
                 .attr("class", function (dataPoint) {
                     if (!dataPoint.cut || !dataPoint.cut[key]) {
-                        return "dot fill-normal-dot " + key + " p" + $this.group.id + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
+                        return "dot fill-normal-dot " + key + " p" + utils.getIdFromIp($this.group.id) + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     } else {
-                        return "dot fill-cut-dot " + key + " p" + $this.group.id + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
+                        return "dot fill-cut-dot " + key + " p" + utils.getIdFromIp($this.group.id) + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     }
                 })
                 .attr("cx", line.x())

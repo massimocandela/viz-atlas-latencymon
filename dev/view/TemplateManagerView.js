@@ -142,9 +142,12 @@ define([
         }());
 
         this.timepickersPopup =
-            '<div style="float: left;">' + lang.startDateLabel + ' <br/><input type="text" class="timepicker-start date-field" /></div>' +
-            '<div style="position: absolute; top: 15px; left: 145px;"><img style="" src="' + widgetUrl + 'view/img/double_arrow.gif" /></div>' +
-            '<div style="float: right;">' + lang.endDateLabel + ' <br/><input type="text" class="timepicker-stop date-field" /></div>';
+            '<div style="float: left;">' + lang.startDateLabel + ' <br/>' +
+            '<input type="text" class="timepicker-start date-field" /></div>' +
+            '<div style="position: absolute; top: 15px; left: 145px;">' +
+            '<img style="" src="' + widgetUrl + 'view/img/double_arrow.gif" /></div>' +
+            '<div style="float: right;">' + lang.endDateLabel + ' <br/>' +
+            '<input type="text" class="timepicker-stop date-field" /></div>';
 
 
 

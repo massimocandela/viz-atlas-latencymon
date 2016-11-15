@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stacked Pings</title>
+    <meta charset="utf-8">
+    <script>LATENCYMON_EXTERNAL_WIDGET_URL = "";</script>
+    <script src="http://localhost:63342/viz-atlas-latencymon/latencymon-widget-main.js?_ijt=1edi7htj6nkgrchrj2fhu6dllo"></script>
+
+</head>
+<body>
+
+<div id="metti-qui" style="width: 90%; margin: auto;">
+</div>
+
+
+<script>
+    var measurements = [3079998,3079999,3080000,3080001,3080002,3080003,6892008,6892009,6892010,6892011,6892012,6892013,6890718,6890720,6890751,6890754,6890832,6890834,6890877,6890880,6890884,6890889,6890892,6891129,6891130,6891132,6891135,6891138,6891140,6891141,6891142,6891148,6892293,6892294,6892295,6892296,6892297,6892300,6892301,6892302,6892303,6892304,6892305,6892306];
+    var probes = [17282, 19894, 19213, 13946];
+    var latencymon = initLatencymon(
+            '#metti-qui',
+            {
+//                dataApiResults:"https://weir-dev.atlas.ripe.net/api/v2/measurements/0000/routequake/results.jsonp",
+//                dataApiResults:"https://local.ripe.net:8000/api/v2/measurements/0000/routequake/results.jsonp",
+//                dataApiResults:"https://atlas.ripe.net/api/v2/measurements/0000/routequake/results.jsonp",
+//                dataApiMeta: "https://weir-dev.ripe.net/api/v2/measurements/0000/routequake/meta.jsonp",
+//                dataApiMeta: "https://local.ripe.net:8000/api/v2/measurements/0000/routequake/meta.jsonp",
+                dataApiMeta: "https://atlas.ripe.net/api/v2/measurements/0000/routequake/meta.jsonp",
+                dev: true,
+                onlyChartMode: false,
+                autoStart: true,
+                showMinimumByDefault: false,
+                onTimeRangeChange: function(start, stop){
+                  console.log("Time Range changed: " + start + ' - ' +  stop);
+                },
+//                groupingType: "measurement",
+
+//                syncWithRealTimeData: false,
+                autoStartGrouping: true,
+//                groupingLabelReplace: {"1962548": "IPv6", "1962550": "ipv4"}
+            }, {
+//                dataFilter: "natural",
+//                measurements:[1791207]//1791207
+//                measurements:[6892008, 6892009, 6892010, 6892011, 6892012, 6892013]//1791207
+                measurements: measurements
+//                dataFilter: "natural",
+//                mergedMeasurements: [measurements],
+//                groups: [{
+//                    measurementId: measurements.join("-"),
+//                    probes: probes,
+//                    id: "all",
+//                    type: "multi-probes"
+//                }]
+//                type: "traceroute"
+//                measurements:[2282522,2282523,2282524,2303615]
+            });
+
+</script>
+
+
+</body>
+</html>

@@ -685,7 +685,7 @@ define([
         this.getCurrentChartsOrder = function(){
             if (!this._cachedOrder) {
                 this._cachedOrder = $.map(env.parentDom.find(".chart > .chart-item"), function (i) {
-                    return $(i).attr("id").replace("chart-probe-", "");
+                    return utils.getIpFromId($(i).attr("id").replace("chart-probe-", ""));
                 });
             }
 
