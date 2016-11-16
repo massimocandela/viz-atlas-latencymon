@@ -27,6 +27,7 @@ requirejs.config({
         "latencymon.lib.jquery-amd": LATENCYMON_LIB_URL + "jquery-libs-amd",
         "latencymon.lib.jquery-libs": LATENCYMON_LIB_URL + "jquery-libs",
         "latencymon.lib.pathseg": LATENCYMON_LIB_URL + "pathseg",
+        // "latencymon.lib.bootstrap.datepicker": LATENCYMON_LIB_URL + "bootstrap-datetimepicker.min",
 
 
 
@@ -122,7 +123,7 @@ define([
          * Init Dependency Injection Vector
          */
         env = {
-            "version": "16.11.14.2",
+            "version": "16.11.17.2",
             "widgetUrl": LATENCYMON_WIDGET_URL + "dev/",
             "autoStart": (instanceParams.autoStart != undefined) ? instanceParams.autoStart : config.autoStart,
             "dataApiResults": instanceParams.dataApiResults || config.dataAPIs.results,
@@ -154,18 +155,19 @@ define([
 
         if (!instanceParams.dev){
             styleDownloads = [
-                // LATENCYMON_LIB_URL + "jquery/jquery-ui-2.min.css",
+                // LATENCYMON_VIEW_URL + "css/style-compiled.css"
                 LATENCYMON_VIEW_URL + "css/style-lib-dist.min.css"
+                // LATENCYMON_LIB_URL + "bootstrap-datetimepicker.css"
+
             ];
         } else {
 
             styleDownloads = [
                 LATENCYMON_VIEW_URL + "css/style.css",
-                // LATENCYMON_LIB_URL + "jquery/jquery-ui.min.css",
+                LATENCYMON_VIEW_URL + "css/bootstrap-datetimepicker.css",
                 LATENCYMON_LIB_URL + "bootstrap/css/bootstrap.min.css",
                 LATENCYMON_LIB_URL + "bootstrap/css/bootstrap-theme.min.css",
                 LATENCYMON_LIB_URL + "bootstrap-table/bootstrap-table.min.css"
-                // LATENCYMON_LIB_URL + "bootstrap-table/bootstrap-table.min.css"
             ];
 
         }

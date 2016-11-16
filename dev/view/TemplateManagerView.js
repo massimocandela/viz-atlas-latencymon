@@ -141,13 +141,13 @@ define([
             return out;
         }());
 
-        this.timepickersPopup =
-            '<div style="float: left;">' + lang.startDateLabel + ' <br/>' +
-            '<input type="text" class="timepicker-start date-field" /></div>' +
-            '<div style="position: absolute; top: 15px; left: 145px;">' +
-            '<img style="" src="' + widgetUrl + 'view/img/double_arrow.gif" /></div>' +
-            '<div style="float: right;">' + lang.endDateLabel + ' <br/>' +
-            '<input type="text" class="timepicker-stop date-field" /></div>';
+        // this.timepickersPopup =
+        //     '<div style="float: left;">' + lang.startDateLabel + ' <br/>' +
+        //     '<input type="text" class="timepicker-start date-field" /></div>' +
+        //     '<div style="position: absolute; top: 15px; left: 145px;">' +
+        //     '<img style="" src="' + widgetUrl + 'view/img/double_arrow.gif" /></div>' +
+        //     '<div style="float: right;">' + lang.endDateLabel + ' <br/>' +
+        //     '<input type="text" class="timepicker-stop date-field" /></div>';
 
 
 
@@ -518,8 +518,8 @@ define([
             var content, dialog;
 
             content = '<div style="clear: both;">' +
-                '<div style="float: left;">Start date: <br><input type="text" value="" class="timepicker-start date-field"></div>' +
-                '<div style="float: right;">End date: <br><input type="text" value="" class="timepicker-stop date-field"></div>' +
+                '<div style="float: left;">Start date: <br><input type="text" value="' + utils.dateToStringShort(utils.UTCDateToLocalDate(env.startDate)) + '" class="timepicker-start date-field"></div>' +
+                '<div style="float: right;">End date: <br><input type="text" value="' + utils.dateToStringShort(utils.UTCDateToLocalDate(env.endDate)) + '" class="timepicker-stop date-field"></div>' +
                 '</div>';
 
             dialog = this._openDialog(lang.titleSelectTimeRange, content, 500, 200, true, function(){
@@ -535,31 +535,23 @@ define([
             stopDatepicker = dialog.find(".timepicker-stop");
 
             startDatepicker.datetimepicker({
-                minDate: env.timeDomain[0],
-                maxDate: env.timeDomain[1],
-                dateFormat: "yy-mm-dd",
-                beforeShow: function(){
-                    $('#ui-datepicker-div').addClass('default-text');
-                },
-                onClose: function(){
-                    $('#ui-datepicker-div').removeClass('default-text');
-                }
+                startDate: env.timeDomain[0],
+                endDate: env.timeDomain[1],
+                autoclose: true,
+                format: "yyyy-mm-dd hh:ii",
+                container: env.parentDom
             });
 
             stopDatepicker.datetimepicker({
-                minDate: env.timeDomain[0],
-                maxDate: env.timeDomain[1],
-                dateFormat: "yy-mm-dd",
-                beforeShow: function(){
-                    $('#ui-datepicker-div').addClass('default-text');
-                },
-                onClose: function(){
-                    $('#ui-datepicker-div').removeClass('default-text');
-                }
+                startDate: env.timeDomain[0],
+                endDate: env.timeDomain[1],
+                autoclose: true,
+                format: "yyyy-mm-dd hh:ii",
+                container: env.parentDom
             });
 
-            startDatepicker.datepicker("setDate", env.startDate);
-            stopDatepicker.datepicker("setDate", env.endDate);
+            env.parentDom.find(".datetimepicker").css("margin-left", env.parentDom.css("margin-left")); // Hack for positioning, DON'T TOUCH IT
+
         };
 
 
