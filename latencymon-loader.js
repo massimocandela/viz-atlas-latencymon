@@ -165,6 +165,7 @@ define([
             styleDownloads = [
                 LATENCYMON_VIEW_URL + "css/style.css",
                 LATENCYMON_VIEW_URL + "css/bootstrap-datetimepicker.css",
+                LATENCYMON_VIEW_URL + "css/jquery-ui.min.css",
                 LATENCYMON_LIB_URL + "bootstrap/css/bootstrap.min.css",
                 LATENCYMON_LIB_URL + "bootstrap/css/bootstrap-theme.min.css",
                 LATENCYMON_LIB_URL + "bootstrap-table/bootstrap-table.min.css"
