@@ -881,7 +881,8 @@ define([
             if (isLast) {
                 xAxis = d3.svg.axis()
                     .scale(x)
-                    .orient("bottom");
+                    .orient("bottom")
+                    .tickFormat(d3.time.format.multi(env.chartManager.timeAxisFormat()));
             } else {
                 xAxis = d3.svg.axis()
                     .scale(x)
@@ -991,7 +992,9 @@ define([
             if (isLast) {
                 xAxis = d3.svg.axis()
                     .scale(x)
-                    .orient("bottom");
+                    .orient("bottom")
+                    .tickFormat(d3.time.format.multi(env.chartManager.timeAxisFormat()));
+
             } else {
                 xAxis = d3.svg.axis()
                     .scale(x)

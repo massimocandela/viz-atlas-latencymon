@@ -8,7 +8,8 @@ define([
     "latencymon.view.chart.comparison",
     "latencymon.filter.relative-rtt",
     "latencymon.filter.natural-rtt"
-], function(config, utils, lang, $, ChartSingleProbeView, ChartMultiProbeView, ChartComparisonView, RelativeRTTFilter, NaturalRTTFilter) {
+], function(config, utils, lang, $, ChartSingleProbeView, ChartMultiProbeView, ChartComparisonView, RelativeRTTFilter,
+            NaturalRTTFilter) {
 
 
     var ChartManager = function (env) {
@@ -18,6 +19,18 @@ define([
         this.dom = {};
         this.yUnit = "%"; // Default unit
         this.charts = {};
+        this.timeAxisFormat = function(){
+            return [
+                [".%L", function(d) { return d.getMilliseconds(); }],
+                [":%S", function(d) { return d.getSeconds(); }],
+                ["%H:%M", function(d) { return d.getMinutes(); }],
+                ["%H:%M", function(d) { return d.getHours(); }],
+                ["%a %d", function(d) { return d.getDay() && d.getDate() != 1; }],
+                ["%b %d", function(d) { return d.getDate() != 1; }],
+                ["%B", function(d) { return d.getMonth(); }],
+                ["%Y", function() { return true; }]
+            ]
+        };
 
         this.addChart = function(group){
             var chartViewObject;
@@ -340,7 +353,6 @@ define([
         this._updateChartSvg = function (chartView, xDomain, yDomain, yRange, yUnit) {
             chartView.update(xDomain, yDomain, yRange, yUnit);
         };
-
 
         this._getBounds = function (xDomain) {
             var maximumElements, forthPercentile, secondPercentile, minimumElement, item, chartKey, groupView, probe,

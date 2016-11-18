@@ -521,7 +521,7 @@ define([
 
             computedYRange = (yRange) ? $.map(yRange, function(n){return (height/(yRange.length - 1)) * n}) : [height, 0];
 
-            x = d3.time.scale.utc()
+            x = d3.time.scale()
                 .domain(xDomain)
                 .rangeRound([0, width]);
 
@@ -532,7 +532,8 @@ define([
             if (isLast) {
                 xAxis = d3.svg.axis()
                     .scale(x)
-                    .orient("bottom");
+                    .orient("bottom")
+                    .tickFormat(d3.time.format.multi(env.chartManager.timeAxisFormat()));
             } else {
                 xAxis = d3.svg.axis()
                     .scale(x)
@@ -589,7 +590,7 @@ define([
             //computedYRange = (yRange) ? $.map(yRange, function(n){return (height/(yRange.length - 1)) * n}) : [height, 0];
             computedYRange = (yRange) ? yRange : [height, 0];
 
-            x = d3.time.scale.utc()
+            x = d3.time.scale()
                 .domain(xDomain)
                 .rangeRound([0, width]);
 
@@ -600,7 +601,8 @@ define([
             if (isLast) {
                 xAxis = d3.svg.axis()
                     .scale(x)
-                    .orient("bottom");
+                    .orient("bottom")
+                    .tickFormat(d3.time.format.multi(env.chartManager.timeAxisFormat()));
             } else {
                 xAxis = d3.svg.axis()
                     .scale(x)
