@@ -44,7 +44,7 @@ function initLatencymon(domElement, instanceParams, queryParams){
     var run;
 
     run = function(){
-        var instances, instance, runLatencymon;
+        var instances, instance;
 
         instances = window.atlas._widgets.latencymon.instances;
         instance = instances.requested.shift();
@@ -57,7 +57,9 @@ function initLatencymon(domElement, instanceParams, queryParams){
                     });
                 } else { // Load deployed version
                     require([LATENCYMON_WIDGET_URL + 'latencymon-dist.js'], function () {
-                        require(['latencymon-loader'], runLatencymon);
+                        require(['latencymon-loader'], function(Latencymon){
+                            instances.running[instance.domElement] = Latencymon(instance);
+                        });
                     });
                 }
             })(instances, instance);
