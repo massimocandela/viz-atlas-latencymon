@@ -22,24 +22,24 @@ LATENCYMON_MAIN_URL = LATENCYMON_WIDGET_URL;
 
 
 window.atlas = window.atlas || {}; // declare namespace
-window.atlas.massimo = window.atlas.massimo || {};
-window.atlas.massimo.latencymon = window.atlas.massimo.latencymon || {};
-window.atlas.massimo.latencymon.instances = window.atlas.massimo.latencymon.instances || {
+window.atlas._widgets = window.atlas._widgets || {};
+window.atlas._widgets.latencymon = window.atlas._widgets.latencymon || {};
+window.atlas._widgets.latencymon.instances = window.atlas._widgets.latencymon.instances || {
         requested: [],
         running: {},
         callbacks: {}
     };
 
 
-if (!window.atlas.massimo.widgetInjectorRequested) { // Only one injector
-    window.atlas.massimo.widgetInjectorLoaded = false;
-    window.atlas.massimo.widgetInjectorRequested = true;
-    window.atlas.massimo.latencymon.tmp_scripts = document.getElementsByTagName('script');
-    window.atlas.massimo.latencymon.tmp_scrip = window.atlas.massimo.latencymon.tmp_scripts[window.atlas.massimo.latencymon.tmp_scripts.length - 1];
-    window.atlas.massimo.injectorScript = document.createElement('script');
-    window.atlas.massimo.injectorScript.async = false;
-    window.atlas.massimo.injectorScript.src = LATENCYMON_LIB_URL + 'require.min.js';
-    window.atlas.massimo.latencymon.tmp_scrip.parentNode.appendChild(window.atlas.massimo.injectorScript);
+if (!window.atlas._widgets.widgetInjectorRequested) { // Only one injector
+    window.atlas._widgets.widgetInjectorLoaded = false;
+    window.atlas._widgets.widgetInjectorRequested = true;
+    window.atlas._widgets.latencymon.tmp_scripts = document.getElementsByTagName('script');
+    window.atlas._widgets.latencymon.tmp_scrip = window.atlas._widgets.latencymon.tmp_scripts[window.atlas._widgets.latencymon.tmp_scripts.length - 1];
+    window.atlas._widgets.injectorScript = document.createElement('script');
+    window.atlas._widgets.injectorScript.async = false;
+    window.atlas._widgets.injectorScript.src = LATENCYMON_LIB_URL + 'require.min.js';
+    window.atlas._widgets.latencymon.tmp_scrip.parentNode.appendChild(window.atlas._widgets.injectorScript);
 }
 
 
@@ -54,7 +54,7 @@ function initLatencymon(domElement, instanceParams, queryParams){
     run = function(){
         var instances, instance, runLatencymon;
 
-        instances = window.atlas.massimo.latencymon.instances;
+        instances = window.atlas._widgets.latencymon.instances;
         instance = instances.requested.shift();
 
         while (instance){
@@ -75,13 +75,13 @@ function initLatencymon(domElement, instanceParams, queryParams){
         }
     };
 
-    window.atlas.massimo.latencymon.instances.requested
+    window.atlas._widgets.latencymon.instances.requested
         .push({domElement: domElement, instanceParams: instanceParams, queryParams: queryParams, callbacks: {}});
 
 
-    if (window.atlas.massimo.widgetInjectorLoaded === false){
-        window.atlas.massimo.injectorScript.onload = function(){
-            window.atlas.massimo.widgetInjectorLoaded = true;
+    if (window.atlas._widgets.widgetInjectorLoaded === false){
+        window.atlas._widgets.injectorScript.onload = function(){
+            window.atlas._widgets.widgetInjectorLoaded = true;
             run();
         };
     } else {
@@ -92,7 +92,7 @@ function initLatencymon(domElement, instanceParams, queryParams){
 
     return {
         shell: function(){
-            var instance = window.atlas.massimo.latencymon.instances.running[domElement];
+            var instance = window.atlas._widgets.latencymon.instances.running[domElement];
 
             if (instance) {
                 return instance;
