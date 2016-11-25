@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>LatencyMON</title>
+    <script>LATENCYMON_EXTERNAL_WIDGET_URL = "";</script>
+    <script src="latencymon-widget-main.js"></script>
+</head>
+<body>
+
+<div id="put-here1" style="width: 90%; margin: auto;"></div>
+<div id="put-here2" style="width: 90%; margin: auto;"></div>
+
+<script>
+    var latencymon1 = initLatencymon(
+            '#put-here1',
+            {
+                autoStart: true,
+                autoStartGrouping: true,
+                dev: true
+            }, {
+                measurements: [1791207]
+            });
+
+
+    var latencymon2 = initLatencymon(
+            '#put-here2',
+            {
+                autoStart: true,
+                autoStartGrouping: true,
+                dev: true
+            }, {
+                measurements: [6892011]
+            });
+
+</script>
+
+
+</body>
+</html>

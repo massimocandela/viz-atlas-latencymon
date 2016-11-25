@@ -21,56 +21,81 @@ LATENCYMON_UTIL_URL = LATENCYMON_WIDGET_URL + "dev/";
 LATENCYMON_MAIN_URL = LATENCYMON_WIDGET_URL;
 
 
-LATENCYMON_INSTANCES = [];
-LATENCYMON_RUNNING_INSTANCES = {};
-LATENCYMON_INSTANCE_CALLBACKS = {};
+window.atlas = window.atlas || {}; // declare namespace
+window.atlas.massimo = window.atlas.massimo || {};
+window.atlas.massimo.latencymon = window.atlas.massimo.latencymon || {};
+window.atlas.massimo.latencymon.instances = window.atlas.massimo.latencymon.instances || {
+        requested: [],
+        running: {},
+        callbacks: {}
+    };
 
-document.write('<script src="' + LATENCYMON_LIB_URL + 'require.min.js"></script>');
+
+if (!window.atlas.massimo.widgetInjectorRequested) { // Only one injector
+    window.atlas.massimo.widgetInjectorLoaded = false;
+    window.atlas.massimo.widgetInjectorRequested = true;
+    window.atlas.massimo.latencymon.tmp_scripts = document.getElementsByTagName('script');
+    window.atlas.massimo.latencymon.tmp_scrip = window.atlas.massimo.latencymon.tmp_scripts[window.atlas.massimo.latencymon.tmp_scripts.length - 1];
+    window.atlas.massimo.injectorScript = document.createElement('script');
+    window.atlas.massimo.injectorScript.async = false;
+    window.atlas.massimo.injectorScript.src = LATENCYMON_LIB_URL + 'require.min.js';
+    window.atlas.massimo.latencymon.tmp_scrip.parentNode.appendChild(window.atlas.massimo.injectorScript);
+}
+
+
 
 
 /**
  * This is the code of the widget system
  */
-
-function getLatencymonInstance(){
-    return LATENCYMON_INSTANCES.shift();
-}
-
-function getLatencymon(domElement, params){
-    var instance = LATENCYMON_RUNNING_INSTANCES[domElement];
-    instance.setParams(params);
-}
-
 function initLatencymon(domElement, instanceParams, queryParams){
-    var runLatencymon;
+    var run;
 
-    LATENCYMON_INSTANCES.push({domElement: domElement, instanceParams: instanceParams, queryParams: queryParams, callbacks: {}});
+    run = function(){
+        var instances, instance, runLatencymon;
 
-    runLatencymon = function (Latencymon) {
-        var instance;
+        instances = window.atlas.massimo.latencymon.instances;
+        instance = instances.requested.shift();
 
-        instance = getLatencymonInstance();
-        LATENCYMON_RUNNING_INSTANCES[domElement] = Latencymon(instance);
+        while (instance){
+            (function(instances, instance){
+                if (instance.instanceParams.dev) { // Load dev version
+                    require([LATENCYMON_WIDGET_URL + 'latencymon-loader.js'], function(Latencymon){
+                        instances.running[instance.domElement] = Latencymon(instance);
+                    });
+                } else { // Load deployed version
+                    require([LATENCYMON_WIDGET_URL + 'latencymon-dist.js'], function () {
+                        require(['latencymon-loader'], runLatencymon);
+                    });
+                }
+            })(instances, instance);
+
+
+            instance = instances.requested.shift();
+        }
     };
 
+    window.atlas.massimo.latencymon.instances.requested
+        .push({domElement: domElement, instanceParams: instanceParams, queryParams: queryParams, callbacks: {}});
 
-    if (!instanceParams.dev) {
 
-        require([LATENCYMON_WIDGET_URL + 'latencymon-dist.js'], function () {
-            require(['latencymon-loader'], runLatencymon);
-        });
-
+    if (window.atlas.massimo.widgetInjectorLoaded === false){
+        window.atlas.massimo.injectorScript.onload = function(){
+            window.atlas.massimo.widgetInjectorLoaded = true;
+            run();
+        };
     } else {
-
-        require([LATENCYMON_WIDGET_URL + 'latencymon-loader.js'], runLatencymon);
-
+        run();
     }
+
 
 
     return {
         shell: function(){
-            if (LATENCYMON_RUNNING_INSTANCES[domElement]) {
-                return LATENCYMON_RUNNING_INSTANCES[domElement];
+            var instance = window.atlas.massimo.latencymon.instances.running[domElement];
+
+            if (instance) {
+                return instance;
             } else {
                 throw "Widget not loaded yet. Try again in a few seconds."
             }
