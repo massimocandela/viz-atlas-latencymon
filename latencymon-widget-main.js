@@ -72,7 +72,9 @@ function initLatencymon(domElement, instanceParams, queryParams){
     window.atlas._widgets.latencymon.instances.requested
         .push({domElement: domElement, instanceParams: instanceParams, queryParams: queryParams, callbacks: {}});
 
-
+    if (document.readyState == 'complete'){
+        window.atlas._widgets.widgetInjectorLoaded = true;
+    }
     if (window.atlas._widgets.widgetInjectorLoaded === false){
         window.atlas._widgets.injectorScript.onload = function(){
             window.atlas._widgets.widgetInjectorLoaded = true;
