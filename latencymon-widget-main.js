@@ -1,29 +1,24 @@
 /**
- * Some path configurations
+ * The location of the widget
  */
-
 LATENCYMON_WIDGET_URL = ((typeof LATENCYMON_EXTERNAL_WIDGET_URL == 'undefined') ? "https://www-static.ripe.net/static/rnd-ui/atlas/static/measurements/widgets/latencymon/" : LATENCYMON_EXTERNAL_WIDGET_URL) ;
 
-LATENCYMON_ENVIRONMENT_URL = LATENCYMON_WIDGET_URL + "dev/environment/";
-
-LATENCYMON_LIB_URL = LATENCYMON_WIDGET_URL + "dev/libs/";
-LATENCYMON_CONNECTOR_URL = LATENCYMON_WIDGET_URL + "dev/connector/";
-
-LATENCYMON_MODEL_URL = LATENCYMON_WIDGET_URL + "dev/model/";
-LATENCYMON_VIEW_URL = LATENCYMON_WIDGET_URL + "dev/view/";
-LATENCYMON_CONTROLLER_URL = LATENCYMON_WIDGET_URL + "dev/controller/";
-LATENCYMON_FILTER_URL = LATENCYMON_WIDGET_URL + "dev/filter/";
-
-LATENCYMON_SESSION_URL = LATENCYMON_WIDGET_URL + "dev/session/";
-LATENCYMON_CONFIG_URL = LATENCYMON_WIDGET_URL + "dev/";
-LATENCYMON_UTIL_URL = LATENCYMON_WIDGET_URL + "dev/";
-
-LATENCYMON_MAIN_URL = LATENCYMON_WIDGET_URL;
-
-
-window.atlas = window.atlas || {}; // declare namespace
+/**
+ * Name space configuration
+ */
+window.atlas = window.atlas || {};
 window.atlas._widgets = window.atlas._widgets || {};
 window.atlas._widgets.latencymon = window.atlas._widgets.latencymon || {};
+window.atlas._widgets.latencymon.urls = window.atlas._widgets.latencymon.urls || {
+        libs: LATENCYMON_WIDGET_URL + "dev/libs/",
+        env: LATENCYMON_WIDGET_URL + "dev/environment/",
+        connector: LATENCYMON_WIDGET_URL + "dev/connector/",
+        model: LATENCYMON_WIDGET_URL + "dev/model/",
+        view: LATENCYMON_WIDGET_URL + "dev/view/",
+        controller: LATENCYMON_WIDGET_URL + "dev/controller/",
+        filter: LATENCYMON_WIDGET_URL + "dev/filter/",
+        session: LATENCYMON_WIDGET_URL + "dev/session/"
+    };
 window.atlas._widgets.latencymon.instances = window.atlas._widgets.latencymon.instances || {
         requested: [],
         running: {},
@@ -38,15 +33,12 @@ if (!window.atlas._widgets.widgetInjectorRequested) { // Only one injector
     window.atlas._widgets.latencymon.tmp_scrip = window.atlas._widgets.latencymon.tmp_scripts[window.atlas._widgets.latencymon.tmp_scripts.length - 1];
     window.atlas._widgets.injectorScript = document.createElement('script');
     window.atlas._widgets.injectorScript.async = false;
-    window.atlas._widgets.injectorScript.src = LATENCYMON_LIB_URL + 'require.min.js';
+    window.atlas._widgets.injectorScript.src = window.atlas._widgets.latencymon.urls.libs + 'require.min.js';
     window.atlas._widgets.latencymon.tmp_scrip.parentNode.appendChild(window.atlas._widgets.injectorScript);
 }
 
-
-
-
 /**
- * This is the code of the widget system
+ * Widget injector
  */
 function initLatencymon(domElement, instanceParams, queryParams){
     var run;
@@ -87,8 +79,6 @@ function initLatencymon(domElement, instanceParams, queryParams){
     } else {
         run();
     }
-
-
 
     return {
         shell: function(){

@@ -6,77 +6,61 @@ requirejs.config({
     waitSeconds: 30,
     paths:{
         /* environment */
-        "latencymon.env": LATENCYMON_ENVIRONMENT_URL + "environment",
-        "latencymon.env.utils": LATENCYMON_ENVIRONMENT_URL + "utils",
-        "latencymon.env.config": LATENCYMON_ENVIRONMENT_URL + "config",
-        "latencymon.env.params-manager": LATENCYMON_ENVIRONMENT_URL + "ParamsManager",
-        "latencymon.env.history-manager": LATENCYMON_ENVIRONMENT_URL + "HistoryManager",
-        "latencymon.env.languages.en": LATENCYMON_ENVIRONMENT_URL + "languages/language.eng",
-
+        "latencymon.env": window.atlas._widgets.latencymon.urls.env + "environment",
+        "latencymon.env.utils": window.atlas._widgets.latencymon.urls.env + "utils",
+        "latencymon.env.config": window.atlas._widgets.latencymon.urls.env + "config",
+        "latencymon.env.params-manager": window.atlas._widgets.latencymon.urls.env + "ParamsManager",
+        "latencymon.env.history-manager": window.atlas._widgets.latencymon.urls.env + "HistoryManager",
+        "latencymon.env.languages.en": window.atlas._widgets.latencymon.urls.env + "languages/language.eng",
 
         /* libs */
-        //"latencymon.lib.d3": LATENCYMON_LIB_URL + "d3/js/d3.v3.amd",
-
-        "latencymon.lib.jquery": LATENCYMON_LIB_URL + "jquery/jquery-1.11.1.min",
-        "latencymon.lib.jquery-ui": LATENCYMON_LIB_URL + "jquery/jquery-ui.min",
-        "latencymon.lib.tree-map": LATENCYMON_LIB_URL + "TreeMap",
-        "latencymon.lib.date-format": LATENCYMON_LIB_URL + "dateFormat",
-        "latencymon.lib.bootstrap": LATENCYMON_LIB_URL + "bootstrap/js/bootstrap.min",
-        "latencymon.lib.socket-io": LATENCYMON_LIB_URL + "socket.io",
-        "latencymon.lib.bootstrap-table": LATENCYMON_LIB_URL + "bootstrap-table/bootstrap-table.min",
-        "latencymon.lib.jquery-amd": LATENCYMON_LIB_URL + "jquery-libs-amd",
-        "latencymon.lib.jquery-libs": LATENCYMON_LIB_URL + "jquery-libs",
-        "latencymon.lib.pathseg": LATENCYMON_LIB_URL + "pathseg",
-        // "latencymon.lib.bootstrap.datepicker": LATENCYMON_LIB_URL + "bootstrap-datetimepicker.min",
-
-
-
-        "latencymon.lib.d3-amd": LATENCYMON_LIB_URL + "d3/js/d3.v3.amd",
-        "latencymon.lib.d3-magnetic-cursor": LATENCYMON_LIB_URL + "d3-magnetic-cursor",
-
-
-        /* model */
-
+        "latencymon.lib.jquery": window.atlas._widgets.latencymon.urls.libs + "jquery/jquery-1.11.1.min",
+        "latencymon.lib.jquery-ui": window.atlas._widgets.latencymon.urls.libs + "jquery/jquery-ui.min",
+        "latencymon.lib.tree-map": window.atlas._widgets.latencymon.urls.libs + "TreeMap",
+        "latencymon.lib.date-format": window.atlas._widgets.latencymon.urls.libs + "dateFormat",
+        "latencymon.lib.bootstrap": window.atlas._widgets.latencymon.urls.libs + "bootstrap/js/bootstrap.min",
+        "latencymon.lib.socket-io": window.atlas._widgets.latencymon.urls.libs + "socket.io",
+        "latencymon.lib.bootstrap-table": window.atlas._widgets.latencymon.urls.libs + "bootstrap-table/bootstrap-table.min",
+        "latencymon.lib.jquery-amd": window.atlas._widgets.latencymon.urls.libs + "jquery-libs-amd",
+        "latencymon.lib.jquery-libs": window.atlas._widgets.latencymon.urls.libs + "jquery-libs",
+        "latencymon.lib.pathseg": window.atlas._widgets.latencymon.urls.libs + "pathseg",
+        "latencymon.lib.d3-amd": window.atlas._widgets.latencymon.urls.libs + "d3/js/d3.v3.amd",
+        "latencymon.lib.d3-magnetic-cursor": window.atlas._widgets.latencymon.urls.libs + "d3-magnetic-cursor",
 
         /* view */
-        "latencymon.view.main": LATENCYMON_VIEW_URL + "MainView",
-        "latencymon.view.chart.singleProbe": LATENCYMON_VIEW_URL + "ChartSingleProbeView",
-        "latencymon.view.chart.multiProbe": LATENCYMON_VIEW_URL + "ChartMultiProbeView",
-        "latencymon.view.chart.comparison": LATENCYMON_VIEW_URL + "ChartComparisonView",
-
-        "latencymon.view.viewport": LATENCYMON_VIEW_URL + "ViewPort",
-        "latencymon.view.chartManager": LATENCYMON_VIEW_URL + "ChartManager",
-        "latencymon.view.templateManager": LATENCYMON_VIEW_URL + "TemplateManagerView",
-        "latencymon.view.timeOverview": LATENCYMON_VIEW_URL + "TimeOverviewView",
+        "latencymon.view.main": window.atlas._widgets.latencymon.urls.view + "MainView",
+        "latencymon.view.chart.singleProbe": window.atlas._widgets.latencymon.urls.view + "ChartSingleProbeView",
+        "latencymon.view.chart.multiProbe": window.atlas._widgets.latencymon.urls.view + "ChartMultiProbeView",
+        "latencymon.view.chart.comparison": window.atlas._widgets.latencymon.urls.view + "ChartComparisonView",
+        "latencymon.view.viewport": window.atlas._widgets.latencymon.urls.view + "ViewPort",
+        "latencymon.view.chartManager": window.atlas._widgets.latencymon.urls.view + "ChartManager",
+        "latencymon.view.templateManager": window.atlas._widgets.latencymon.urls.view + "TemplateManagerView",
+        "latencymon.view.timeOverview": window.atlas._widgets.latencymon.urls.view + "TimeOverviewView",
 
         /* view.svg */
-        "latencymon.view.svg.chart": LATENCYMON_VIEW_URL + "svg/SvgChartView",
-
+        "latencymon.view.svg.chart": window.atlas._widgets.latencymon.urls.view + "svg/SvgChartView",
 
         /* model*/
-        "latencymon.model.group": LATENCYMON_MODEL_URL + "Group",
+        "latencymon.model.group": window.atlas._widgets.latencymon.urls.model + "Group",
 
         /* controller */
-        "latencymon.controller.gesture-manager": LATENCYMON_CONTROLLER_URL + "GesturesManager",
-        "latencymon.controller.group-manager": LATENCYMON_CONTROLLER_URL + "GroupManager",
-        "latencymon.controller.url-manager": LATENCYMON_CONTROLLER_URL + "UrlManager",
-        "latencymon.controller.main": LATENCYMON_CONTROLLER_URL + "main",
+        "latencymon.controller.gesture-manager": window.atlas._widgets.latencymon.urls.controller + "GesturesManager",
+        "latencymon.controller.group-manager": window.atlas._widgets.latencymon.urls.controller + "GroupManager",
+        "latencymon.controller.url-manager": window.atlas._widgets.latencymon.urls.controller + "UrlManager",
+        "latencymon.controller.main": window.atlas._widgets.latencymon.urls.controller + "main",
 
         /* data manipulation */
-        "latencymon.filter.relative-rtt": LATENCYMON_FILTER_URL + "RelativeRTTFilter",
-        "latencymon.filter.natural-rtt": LATENCYMON_FILTER_URL + "NaturalRTTFilter",
-
+        "latencymon.filter.relative-rtt": window.atlas._widgets.latencymon.urls.filter + "RelativeRTTFilter",
+        "latencymon.filter.natural-rtt": window.atlas._widgets.latencymon.urls.filter + "NaturalRTTFilter",
 
         /* connector */
-        "latencymon.connector.facade": LATENCYMON_CONNECTOR_URL + "ConnectorFacade",
-        //"connector.history": LATENCYMON_CONNECTOR_URL + "HistoryConnector",
-        "latencymon.connector.history-auto": LATENCYMON_CONNECTOR_URL + "HistoryConnectorAutoResolution",
-        "latencymon.connector.live": LATENCYMON_CONNECTOR_URL + "LiveConnector",
-        "latencymon.connector.translate-to-ping": LATENCYMON_CONNECTOR_URL + "TranslateToPing",
-
+        "latencymon.connector.facade": window.atlas._widgets.latencymon.urls.connector + "ConnectorFacade",
+        "latencymon.connector.history-auto": window.atlas._widgets.latencymon.urls.connector + "HistoryConnectorAutoResolution",
+        "latencymon.connector.live": window.atlas._widgets.latencymon.urls.connector + "LiveConnector",
+        "latencymon.connector.translate-to-ping": window.atlas._widgets.latencymon.urls.connector + "TranslateToPing",
 
         /* session */
-        "latencymon.session.facade": LATENCYMON_SESSION_URL + "SessionManager"
+        "latencymon.session.facade": window.atlas._widgets.latencymon.urls.session + "SessionManager"
     },
     shim:{
 
@@ -155,20 +139,20 @@ define([
 
         if (!instanceParams.dev){
             styleDownloads = [
-                // LATENCYMON_VIEW_URL + "css/style-compiled.css"
-                LATENCYMON_VIEW_URL + "css/style-lib-dist.min.css"
-                // LATENCYMON_LIB_URL + "bootstrap-datetimepicker.css"
+                // window.atlas._widgets.latencymon.urls.view + "css/style-compiled.css"
+                window.atlas._widgets.latencymon.urls.view + "css/style-lib-dist.min.css"
+                // window.atlas._widgets.latencymon.urls.libs + "bootstrap-datetimepicker.css"
 
             ];
         } else {
 
             styleDownloads = [
-                LATENCYMON_VIEW_URL + "css/style.css",
-                LATENCYMON_VIEW_URL + "css/bootstrap-datetimepicker.css",
-                LATENCYMON_VIEW_URL + "css/jquery-ui.min.css",
-                LATENCYMON_LIB_URL + "bootstrap/css/bootstrap.min.css",
-                LATENCYMON_LIB_URL + "bootstrap/css/bootstrap-theme.min.css",
-                LATENCYMON_LIB_URL + "bootstrap-table/bootstrap-table.min.css"
+                window.atlas._widgets.latencymon.urls.view + "css/style.css",
+                window.atlas._widgets.latencymon.urls.view + "css/bootstrap-datetimepicker.css",
+                window.atlas._widgets.latencymon.urls.view + "css/jquery-ui.min.css",
+                window.atlas._widgets.latencymon.urls.libs + "bootstrap/css/bootstrap.min.css",
+                window.atlas._widgets.latencymon.urls.libs + "bootstrap/css/bootstrap-theme.min.css",
+                window.atlas._widgets.latencymon.urls.libs + "bootstrap-table/bootstrap-table.min.css"
             ];
 
         }
