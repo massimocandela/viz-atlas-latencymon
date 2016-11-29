@@ -12,6 +12,7 @@ define([
             timePointer, whiteLeftBackground, averageSeriesCache, lastDomainRedrawn, currentSeries, showOnlyAttempt;
 
         this.group = group;
+        this.idString = utils.getIdFromIp("" + group.id);
         this.lastUpdateParams = {};
         this.type = "multi-probes";
         $this = this;
@@ -446,13 +447,13 @@ define([
                 numberDisplayedProbes++;
                 if (numberDisplayedProbes <= config.maxNumberOfDisplayedProbesOnChartInfo) {
                     probeId = probe.id;
-                    groupDescriptionDom.push(' <span data-group-id="' + utils.getIdFromIp(group.id) + '" data-probe-id="' + probeId + '" class="probe-listed" title="' + probeId + ' (no data)">' + probeId + '</span>');
+                    groupDescriptionDom.push(' <span data-group-id="' + $this.idString + '" data-probe-id="' + probeId + '" class="probe-listed" title="' + probeId + ' (no data)">' + probeId + '</span>');
                 } else {
                     displayedProbeListTruncated = true;
                 }
             });
 
-            probeDom = $('<div class="chart-item probe-multi-chart" id="chart-probe-' + utils.getIdFromIp(group.id) + '"></div>');
+            probeDom = $('<div class="chart-item probe-multi-chart" id="chart-probe-' + $this.idString + '"></div>');
             infoDom = $('<div class="probe-multi-info"></div>')
                 .height(chartHeight)
                 .width(config.probeDescriptionDomWidth);
@@ -499,7 +500,7 @@ define([
 
 
         this.isLast = function () {
-            return env.parentDom.find('.chart-item').last().attr('id').replace('chart-probe-', '') == utils.getIdFromIp(this.group.id);
+            return env.parentDom.find('.chart-item').last().attr('id').replace('chart-probe-', '') == $this.idString;
         };
 
 
@@ -612,9 +613,9 @@ define([
             dots
                 .attr("class", function (dataPoint) {
                     if (!dataPoint.cut || !dataPoint.cut[key]) {
-                        return "dot fill-normal-dot " + key + " p" + utils.getIdFromIp($this.group.id) + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
+                        return "dot fill-normal-dot " + key + " p" + $this.idString + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     } else {
-                        return "dot fill-cut-dot " + key + " p" + utils.getIdFromIp($this.group.id) + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
+                        return "dot fill-cut-dot " + key + " p" + $this.idString + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     }
                 })
                 .attr("cx", lineSkeletons[key].x())
@@ -1133,7 +1134,7 @@ define([
                         $this.showPopUp(timePointerXPosition, dataSampleHovered);
 
                         d3
-                            .selectAll(".p" + utils.getIdFromIp($this.group.id) + ".dot[cx=\"" + xPosition + "\"]")
+                            .selectAll(".p" + $this.idString + ".dot[cx=\"" + xPosition + "\"]")
                             .attr("r", 7)
                             .transition()
                             .duration(2000)
@@ -1236,9 +1237,9 @@ define([
                 .append("circle")
                 .attr("class", function (dataPoint) {
                     if (!dataPoint.cut || !dataPoint.cut[key]) {
-                        return "dot fill-normal-dot " + key + " p" + utils.getIdFromIp($this.group.id) + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
+                        return "dot fill-normal-dot " + key + " p" + $this.idString + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     } else {
-                        return "dot fill-cut-dot " + key + " p" + utils.getIdFromIp($this.group.id) + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
+                        return "dot fill-cut-dot " + key + " p" + $this.idString + ((!env.showSinglePacket || key == showOnlyAttempt) ? "" : " svg-hidden");
                     }
                 })
                 .attr("cx", line.x())
