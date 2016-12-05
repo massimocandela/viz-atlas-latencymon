@@ -107,7 +107,7 @@ define([
          * Init Dependency Injection Vector
          */
         env = {
-            "version": "16.11.29.2",
+            "version": "16.12.5.2",
             "widgetUrl": LATENCYMON_WIDGET_URL + "dev/",
             "autoStart": (instanceParams.autoStart != undefined) ? instanceParams.autoStart : config.autoStart,
             "dataApiResults": instanceParams.dataApiResults || config.dataAPIs.results,
@@ -118,6 +118,7 @@ define([
             "groupingType": instanceParams.groupingType,
             "onlyChartMode": instanceParams.onlyChartMode,
             "onTimeRangeChange": instanceParams.onTimeRangeChange,
+            "onTimeSelection": instanceParams.onTimeSelection,
             "permalinkEnabled": (instanceParams.permalinkEnabled != undefined) ? instanceParams.permalinkEnabled : config.permalinkEnabled,
             "groupingLabelReplace": (instanceParams.groupingLabelReplace != undefined) ? instanceParams.groupingLabelReplace : {},
             "parentDom": $(parentDom),

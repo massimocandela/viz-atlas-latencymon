@@ -1021,29 +1021,37 @@ define([
                 .attr("class", "chart-svg")
                 .on("mousedown", function(){
                     env.selectionOngoing = true;
+                    env.selectionEndPoint = null;
                     env.selectionStartPoint = d3.mouse(this)[0];
                 })
                 .on("mouseup", function(){
                     if (env.selectionOngoing) {
 
                         env.selectionOngoing = false;
-                        env.selectionEndPoint = Math.max(Math.min(d3.mouse(this)[0], width + margin.left), margin.left);
 
-                        d3.select(env.parentDom[0])
-                            .selectAll(".selection-rect")
-                            .style("opacity", 0)
-                            .attr("width", 0);
+                        if (env.selectionEndPoint) {
+                            env.selectionEndPoint = Math.max(Math.min(d3.mouse(this)[0], width + margin.left), margin.left);
 
-                        if (Math.abs(env.selectionStartPoint - env.selectionEndPoint) > config.minimumPixelSelectable) {
-                            var startDate, endDate;
+                            d3.select(env.parentDom[0])
+                                .selectAll(".selection-rect")
+                                .style("opacity", 0)
+                                .attr("width", 0);
 
-                            startDate = x.invert(Math.min(env.selectionStartPoint, env.selectionEndPoint));
-                            endDate = x.invert(Math.max(env.selectionEndPoint, env.selectionStartPoint));
+                            if (Math.abs(env.selectionStartPoint - env.selectionEndPoint) > config.minimumPixelSelectable) {
+                                var startDate, endDate;
 
-                            if (env.onTimeRangeChange){
-                                env.onTimeRangeChange(startDate, endDate);
+                                startDate = x.invert(Math.min(env.selectionStartPoint, env.selectionEndPoint));
+                                endDate = x.invert(Math.max(env.selectionEndPoint, env.selectionStartPoint));
+
+                                if (env.onTimeRangeChange) {
+                                    env.onTimeRangeChange(startDate, endDate);
+                                }
+                                env.main.setTimeRange(startDate, endDate);
                             }
-                            env.main.setTimeRange(startDate, endDate);
+                        } else { // it was just a click
+                            if (env.onTimeSelection) {
+                                env.onTimeSelection(x.invert(env.selectionStartPoint));
+                            }
                         }
                     }
                 })

@@ -8,8 +8,8 @@
 
     // Create a connection
 //    socket = io("https://stream-dev.atlas.ripe.net:443", { path : "/stream/socket.io" });
-        socket = io("https://atlas-stream.ripe.net:443", { path : "/stream/socket.io" });
-//        socket = io("http://stream02.atlas.ripe.net:80", { path : "/stream/socket.io" });
+//        socket = io("https://atlas-stream.ripe.net:443", { path : "/stream/socket.io" });
+        socket = io("http://stream01.atlas.ripe.net:80", { path : "/stream/socket.io" });
 
     // Counter of items received
 //    howmany = 0;
@@ -23,6 +23,10 @@
 //        if (printReceivedSamples){
             console.log("atlas_probestatus", result);
 //        }
+    });
+
+    socket.on("connect", function(result){
+        console.log("connected");
     });
 
     window.show = false;
@@ -76,7 +80,7 @@ var inc = 0;
 
 //    for (var n=0; n<100; n++) {
 //        inc ++ ;
-        socket.emit("atlas_subscribe", { stream_type: "result", type: "traceroute"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
+        socket.emit("atlas_subscribe", {"msm": 1001, "buffering": true, "stream_type": "result"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
 //        socket.emit("atlas_subscribe", { stream_type: "result", type: "traceroute"}); // possible: type, prb, msm, sourceAddress, sourcePrefix, destinationAddress, destinationPrefix
 
 //    socket.emit("atlas_result", {
