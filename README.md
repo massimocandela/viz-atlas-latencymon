@@ -12,6 +12,5 @@ Usually this notice is added by the widget itself. If you have a version of the 
 
 Please, always refer to the tool with the correct name of LatencyMON.
 
-If you are sharing a link to a LatencyMON instance or an image of the tool on a social media, add the tag #LatencyMON.
-
+If you are sharing a link to a LatencyMON instance or an image of the tool on a social media, add the tag #LatencyMON. 
 The watermark of LatencyMON and RIPE Atlas must be always visible.
